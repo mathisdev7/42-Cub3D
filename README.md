@@ -22,7 +22,7 @@ Cub3D is a graphic design project that aims to create a 3D perspective in a maze
 git clone <repository-url>
 
 # Go to project directory
-cd cub3D
+cd 42-Cub3D
 
 # Compile the project
 make
