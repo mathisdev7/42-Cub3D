@@ -1,6 +1,7 @@
+C 255,255,255
+F 255,255,222
+
 NO ./assets/test.xpm
 SO ./assets/test.xpm
 WE ./assets/test.xpm
-EA ./assets/test.xp
-C 255,255,255
-F 255,255,255
+EA ./assets/test.xpm

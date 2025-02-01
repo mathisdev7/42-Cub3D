@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 20:38:41 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:53:55 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,6 @@ int		check_map_content(char *map_path);
 int		check_cardinal_points(char *line);
 int		check_file(char *arg);
 char	*remove_spaces(char *line);
+void	ft_free_array(char **array);
+
 #endif

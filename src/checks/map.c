@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:09:45 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 21:13:20 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:56:00 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@ int	check_map(char *map_path)
 	}
 	close(fd);
 	return (0);
-}
-
-void	ft_free_array(char **array)
-{
-	int	i;
-
-	i = -1;
-	while (array[++i])
-		free(array[i]);
-	free(array);
 }
 
 int	is_rgb(char *line)
@@ -83,44 +73,55 @@ int	check_lines(char *line)
 	return (0);
 }
 
-int	check_map_content(char *map_path)
+int	read_lines(int fd, int *count, char *line, char *cleaned)
 {
-	int		fd;
-	char	*line;
-	int		count;
-	char	*cleaned;
-
-	count = 0;
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-		return (close(fd), 1);
-	line = get_next_line(fd);
-	if (line == NULL)
-		return (close(fd), gnl_cleanup(fd), 1);
 	while (line)
 	{
 		cleaned = remove_spaces(line);
 		free(line);
 		line = cleaned;
 		if (!line)
-			return (free(line), close(fd), gnl_cleanup(fd), 1);
-		if (count < 4)
+			return (free(line), 1);
+		if (line[0] == 'O' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E'
+			|| line[0] == 'N')
 		{
-			count++;
+			(*count)++;
 			if (!check_cardinal_points(line))
-				return (free(line), close(fd), gnl_cleanup(fd), 1);
+				return (free(line), 1);
 		}
-		else
+		else if (line[0] == 'C' || line[0] == 'F')
 		{
-			count++;
-			if ((count == 5 || count == 6) && !check_lines(line))
-				return (free(line), close(fd), gnl_cleanup(fd), 1);
+			if (!check_lines(line))
+				return (free(line), 1);
 		}
+		// else if (line[0] == '1' || line[0] == '0')
+		// {
+		// 	if (!check_map_IDK(line))
+		// 		return (free(line), 1);
+		// }
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (count != 6)
-		return (free(line), gnl_cleanup(fd), close(fd), 1);
+	return (0);
+}
+
+int	check_map_content(char *map_path)
+{
+	int		fd;
+	int		count;
+	char	*line;
+	char	*cleaned;
+
+	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+		return (close(fd), 1);
+	line = get_next_line(fd);
+	cleaned = NULL;
+	if (line == NULL)
+		return (1);
+	count = 0;
+	if (read_lines(fd, &count, line, cleaned) != 0)
+		return (close(fd), gnl_cleanup(fd), 1);
 	gnl_cleanup(fd);
 	close(fd);
 	return (0);

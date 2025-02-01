@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 01:36:46 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 20:43:51 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:52:48 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,9 @@ int	check_cardinal_points(char *line)
 		if (!path)
 			return (0);
 		if (!file_exists(path))
-		{
-			free(path);
-			return (0);
-		}
+			return (free(path), 0);
 		if (check_file(path))
-		{
-			free(path);
-			return (0);
-		}
+			return (free(path), 0);
 		free(path);
 	}
 	return (1);

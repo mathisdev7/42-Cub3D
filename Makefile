@@ -6,12 +6,11 @@
 #    By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 20:34:26 by mazeghou          #+#    #+#              #
-#    Updated: 2025/02/01 21:30:44 by mazeghou         ###   ########.fr        #
+#    Updated: 2025/02/01 23:54:52 by mazeghou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = cub3D
-
 CC          = cc
 CFLAGS      = -Werror -Wextra -Wall -g3
 
@@ -24,7 +23,7 @@ LIBFT_NAME  = libft.a
 LIBFT       = $(LIBFT_PATH)$(LIBFT_NAME)
 
 SRC_PATH    = src/
-SRC         = main.c checks/map.c checks/args.c checks/cardinals.c checks/file.c
+SRC         = main.c checks/map.c checks/args.c checks/cardinals.c checks/file.c utils/free.c
 
 SRCS        = $(addprefix $(SRC_PATH), $(SRC))
 
