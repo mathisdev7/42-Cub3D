@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 00:50:03 by mazeghou         ###   ########.fr       */
+/*   Created: 2024/10/25 14:50:14 by mazeghou          #+#    #+#             */
+/*   Updated: 2024/11/06 22:10:35 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
-# include <fcntl.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (c);
+	else
+		return (0);
+}
 
-// Structure definitions will go here
+/*
+int main() {
+    char num1 = '3';
+    char num2 = '9';
+    char not_num = 'a';
 
-// Function prototypes will go here
-int	check_args(int argc, char **argv);
-int	check_map(char *map_path);
-int	check_map_content(char *map_path);
-#endif
+    printf("3 = %d\n", ft_isdigit(num1));
+    printf("9 = %d\n", ft_isdigit(num2));
+    printf("a = %d\n", ft_isdigit(not_num));
+}
+*/

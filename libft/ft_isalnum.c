@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 23:17:21 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 01:13:35 by mazeghou         ###   ########.fr       */
+/*   Created: 2024/10/25 14:50:14 by mazeghou          #+#    #+#             */
+/*   Updated: 2024/11/06 22:00:25 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isalnum(int c)
 {
-	if (check_args(argc, argv))
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= 48 && c <= 57))
+		return (1);
+	else
 		return (0);
-	if (check_map(argv[1]))
-		return (0);
-	printf("check_map_content: %d\n", check_map_content(argv[1]));
-	if (!check_map_content(argv[1]))
-		return (printf("error\n"), 0);
-	return (0);
 }
+
+/*
+int main()
+{
+	char al = 'a';
+	char not_al = '+';
+	char num = '2';
+	char not_num = '-';
+	printf("a = %d\n", ft_isalnum(al));
+	printf("not a = %d\n", ft_isalnum(not_al));
+	printf("num = %d\n", ft_isalnum(num));
+	printf("not_num = %d\n", ft_isalnum(not_num));
+}
+*/

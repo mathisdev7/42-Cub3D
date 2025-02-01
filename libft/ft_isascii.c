@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 00:50:03 by mazeghou         ###   ########.fr       */
+/*   Created: 2024/10/25 14:50:14 by mazeghou          #+#    #+#             */
+/*   Updated: 2024/11/07 17:11:10 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "libft.h"
 
-# include "../libft/libft.h"
-# include "../minilibx-linux/mlx.h"
-# include <fcntl.h>
-# include <math.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+int	ft_isascii(int c)
+{
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
+		return (0);
+}
 
-// Structure definitions will go here
+/*
+int main() {
+    char c1 = 'a';
+    char c2 = '\n';
 
-// Function prototypes will go here
-int	check_args(int argc, char **argv);
-int	check_map(char *map_path);
-int	check_map_content(char *map_path);
-#endif
+    printf("a = %d\n", ft_isascii(c1));
+    printf("\\n = %d\n", ft_isascii(c2));
+}
+*/
