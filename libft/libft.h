@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 16:47:58 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 00:48:28 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/01 20:56:26 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,5 @@ char	*create_stash(char *stash);
 char	*fill_line(char *stash);
 char	*get_next_line(int fd);
 size_t	ft_strlen_gnl(const char *str);
+void	gnl_cleanup(int fd);
 #endif

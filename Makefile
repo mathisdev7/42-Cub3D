@@ -6,62 +6,95 @@
 #    By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 20:34:26 by mazeghou          #+#    #+#              #
-#    Updated: 2025/02/01 20:14:01 by mazeghou         ###   ########.fr        #
+#    Updated: 2025/02/01 21:30:44 by mazeghou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= cub3D
+NAME        = cub3D
 
-CC		= cc
-CFLAGS	= -Werror -Wextra -Wall -g3
+CC          = cc
+CFLAGS      = -Werror -Wextra -Wall -g3
 
-MLX_PATH	= minilibx-linux/
-MLX_NAME	= libmlx.a
-MLX			= $(MLX_PATH)$(MLX_NAME)
+MLX_PATH    = minilibx-linux/
+MLX_NAME    = libmlx.a
+MLX         = $(MLX_PATH)$(MLX_NAME)
 
-LIBFT_PATH	= libft/
-LIBFT_NAME	= libft.a
-LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
+LIBFT_PATH  = libft/
+LIBFT_NAME  = libft.a
+LIBFT       = $(LIBFT_PATH)$(LIBFT_NAME)
 
-SRC_PATH	= src/
-SRC			= main.c checks/map.c checks/args.c checks/cardinals.c checks/file.c
+SRC_PATH    = src/
+SRC         = main.c checks/map.c checks/args.c checks/cardinals.c checks/file.c
 
-SRCS		= $(addprefix $(SRC_PATH), $(SRC))
+SRCS        = $(addprefix $(SRC_PATH), $(SRC))
 
-OBJ_PATH	= obj/
-OBJ			= $(SRC:.c=.o)
-OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
+OBJ_PATH    = obj/
+OBJ         = $(SRC:.c=.o)
+OBJS        = $(addprefix $(OBJ_PATH), $(OBJ))
 
-INC			= -I ./includes/ \
-			  -I ./minilibx-linux/
+INC         = -I ./includes/ \
+              -I ./minilibx-linux/
+
+RESET       = \033[0m
+RED         = \033[31m
+GREEN       = \033[32m
+YELLOW      = \033[33m
+BLUE        = \033[34m
+MAGENTA     = \033[35m
+CYAN        = \033[36m
+WHITE       = \033[37m
+BOLD        = \033[1m
 
 all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
 
 $(OBJ_PATH):
-	mkdir -p $(OBJ_PATH)
-	mkdir -p $(OBJ_PATH)/checks
+	@mkdir -p $(OBJ_PATH)
+	@mkdir -p $(OBJ_PATH)/checks
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	@echo "$(CYAN)Compiling:$(WHITE) $<"
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ $(MLX) $(LIBFT) -lXext -lX11 -lm
+	@echo "$(YELLOW)Building executable: $(NAME)$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJS) -o $@ $(MLX) $(LIBFT) -lXext -lX11 -lm
+	@echo "$(GREEN)Build successful!$(RESET)"
 
 $(MLX):
-	make -sC $(MLX_PATH)
+	@echo "$(MAGENTA)Building MinilibX...$(RESET)"
+	@make -sC $(MLX_PATH) > /dev/null 2>&1
 
 $(LIBFT):
-	make -sC $(LIBFT_PATH)
+	@echo "$(MAGENTA)Building Libft...$(RESET)"
+	@make -sC $(LIBFT_PATH)
 
 clean:
-	rm -rf $(OBJ_PATH)
-	make -C $(MLX_PATH) clean
-	make -C $(LIBFT_PATH) clean
+	@printf "$(RED)Cleaning up... $(RESET)"
+	@spinner="-+/"; \
+	len=10; \
+	for i in $$(seq 1 $$len); do \
+		char=$$(expr $$i % $$(echo -n $$spinner | wc -m)); \
+		printf "\r$(RED)Cleaning up... ${BOLD}%s$(RESET)" "$$(echo -n $$spinner | cut -c$$((char+1)))"; \
+		sleep 0.1; \
+	done
+	@rm -rf $(OBJ_PATH) > /dev/null 2>&1
+	@make -C $(MLX_PATH) clean > /dev/null 2>&1
+	@make -C $(LIBFT_PATH) clean > /dev/null 2>&1
+	@printf "\r$(GREEN)Cleanup complete! ✔$(RESET)\n"
 
 fclean: clean
-	rm -f $(NAME)
-	make -C $(LIBFT_PATH) fclean
+	@printf "$(RED)Cleaning up... $(RESET)"
+	@spinner="-+/"; \
+	len=10; \
+	for i in $$(seq 1 $$len); do \
+		char=$$(expr $$i % $$(echo -n $$spinner | wc -m)); \
+		printf "\r$(RED)Cleaning up... ${BOLD}%s$(RESET)" "$$(echo -n $$spinner | cut -c$$((char+1)))"; \
+		sleep 0.1; \
+	done
+	@rm -rf $(NAME) > /dev/null 2>&1
+	@make -C $(LIBFT_PATH) fclean > /dev/null 2>&1
+	@printf "\r$(GREEN)Cleanup complete! ✔$(RESET)\n"
 
 re: fclean all
 

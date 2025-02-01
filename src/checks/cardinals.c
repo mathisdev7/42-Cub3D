@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 01:36:46 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 20:13:16 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/01 20:43:51 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,17 @@ static int	file_exists(char *path)
 int	check_cardinal_points(char *line)
 {
 	char	*path;
+	char	*temp;
 
 	if (line[0] == 'N' || line[0] == 'S' || line[0] == 'E' || line[0] == 'W')
 	{
 		if (line[2] != ' ')
 			return (0);
-		path = ft_strdup(line + 3);
-		if (!path)
+		temp = ft_strdup(line + 3);
+		if (!temp)
 			return (0);
-		path = remove_spaces(path);
+		path = remove_spaces(temp);
+		free(temp);
 		if (!path)
 			return (0);
 		if (!file_exists(path))

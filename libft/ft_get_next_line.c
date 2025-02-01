@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:25:16 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 01:52:45 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/01 21:13:52 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,22 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = fill_line(stash);
 	stash = create_stash(stash);
+	if (!stash && !line)
+	{
+		free(stash);
+		stash = NULL;
+		return (NULL);
+	}
 	return (line);
+}
+
+void	gnl_cleanup(int fd)
+{
+	static char	*stash[1024];
+
+	if (fd >= 0 && fd < 1024)
+	{
+		free(stash[fd]);
+		stash[fd] = NULL;
+	}
 }
