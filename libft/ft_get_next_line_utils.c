@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 15:25:59 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 00:48:20 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/01 01:49:14 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ char	*create_stash(char *stash)
 	}
 	result = (char *)malloc(sizeof(char) * (ft_strlen_gnl(stash) - i++));
 	if (!result)
+	{
+		free(stash);
 		return (NULL);
+	}
 	j = 0;
 	while (stash[i])
 		result[j++] = stash[i++];

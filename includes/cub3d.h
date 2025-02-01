@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 00:50:03 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/01 01:37:03 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@
 int	check_args(int argc, char **argv);
 int	check_map(char *map_path);
 int	check_map_content(char *map_path);
+int	check_cardinal_points(char *line);
 #endif
