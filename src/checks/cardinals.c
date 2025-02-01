@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 01:36:46 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 01:51:58 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/01 20:13:16 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ char	*remove_spaces(char *line)
 	return (new_line);
 }
 
+static int	file_exists(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	close(fd);
+	return (1);
+}
+
 int	check_cardinal_points(char *line)
 {
 	char	*path;
@@ -48,7 +59,12 @@ int	check_cardinal_points(char *line)
 		path = remove_spaces(path);
 		if (!path)
 			return (0);
-		if (access(path, F_OK) == -1)
+		if (!file_exists(path))
+		{
+			free(path);
+			return (0);
+		}
+		if (check_file(path))
 		{
 			free(path);
 			return (0);

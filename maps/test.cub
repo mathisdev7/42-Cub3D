@@ -1,4 +1,4 @@
-NO ./maps/test.cub
-SO ./maps/test.cub
-WE ./maps/test.cub
-EA ./maps/test.cub
+NO ./assets/test.xpm
+SO ./assets/test.xpm
+WE ./assets/test.xpm
+EA ./assets/test.xpm

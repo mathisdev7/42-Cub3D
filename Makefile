@@ -6,7 +6,7 @@
 #    By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 20:34:26 by mazeghou          #+#    #+#              #
-#    Updated: 2025/02/01 01:37:35 by mazeghou         ###   ########.fr        #
+#    Updated: 2025/02/01 20:14:01 by mazeghou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBFT_NAME	= libft.a
 LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
 SRC_PATH	= src/
-SRC			= main.c checks/map.c checks/args.c checks/cardinals.c
+SRC			= main.c checks/map.c checks/args.c checks/cardinals.c checks/file.c
 
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
