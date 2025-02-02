@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:09:45 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 10:50:57 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 10:58:33 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	check_map(char *map_path)
 	map = parse_map(map_path);
 	if (map == NULL)
 		return (close(fd), gnl_cleanup(fd), 1);
-	if (check_map_content(map, get_map_size(map_path)) != 0)
+	if (check_map_content(map))
 		return (close(fd), gnl_cleanup(fd), ft_free_array(map), 1);
 	gnl_cleanup(fd);
 	close(fd);
