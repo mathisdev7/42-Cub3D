@@ -6,31 +6,11 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:09:45 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 23:56:00 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 10:50:57 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int	check_map(char *map_path)
-{
-	int		fd;
-	char	*line;
-
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-		return (1);
-	line = get_next_line(fd);
-	if (line == NULL)
-		return (close(fd), 1);
-	while (line)
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (0);
-}
 
 int	is_rgb(char *line)
 {
@@ -94,23 +74,19 @@ int	read_lines(int fd, int *count, char *line, char *cleaned)
 			if (!check_lines(line))
 				return (free(line), 1);
 		}
-		// else if (line[0] == '1' || line[0] == '0')
-		// {
-		// 	if (!check_map_IDK(line))
-		// 		return (free(line), 1);
-		// }
 		free(line);
 		line = get_next_line(fd);
 	}
 	return (0);
 }
 
-int	check_map_content(char *map_path)
+int	check_map(char *map_path)
 {
 	int		fd;
 	int		count;
 	char	*line;
 	char	*cleaned;
+	char	**map;
 
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
@@ -122,7 +98,13 @@ int	check_map_content(char *map_path)
 	count = 0;
 	if (read_lines(fd, &count, line, cleaned) != 0)
 		return (close(fd), gnl_cleanup(fd), 1);
+	map = parse_map(map_path);
+	if (map == NULL)
+		return (close(fd), gnl_cleanup(fd), 1);
+	if (check_map_content(map, get_map_size(map_path)) != 0)
+		return (close(fd), gnl_cleanup(fd), ft_free_array(map), 1);
 	gnl_cleanup(fd);
 	close(fd);
+	ft_free_array(map);
 	return (0);
 }
