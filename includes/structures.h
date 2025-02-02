@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:26:01 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 12:51:10 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 14:55:38 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ typedef struct s_map_info
 	int		player_x;
 	int		player_y;
 	double	player_angle;
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+	char	*floor_color;
+	char	*ceiling_color;
 }			t_map_info;
 
 typedef struct s_parse_data
