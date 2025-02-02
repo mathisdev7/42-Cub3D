@@ -6,7 +6,7 @@
 #    By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 20:34:26 by mazeghou          #+#    #+#              #
-#    Updated: 2025/02/02 10:54:08 by mazeghou         ###   ########.fr        #
+#    Updated: 2025/02/02 12:52:02 by mazeghou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,10 @@ LIBFT_NAME  = libft.a
 LIBFT       = $(LIBFT_PATH)$(LIBFT_NAME)
 
 SRC_PATH    = src/
-SRC         = main.c checks/map.c checks/args.c checks/cardinals.c checks/file.c utils/free.c checks/map_content.c checks/map_utils.c
+SRC         = main.c parsing/map.c parsing/args.c parsing/cardinals.c \
+				parsing/file.c utils/free.c parsing/map_content.c \
+				parsing/map_utils.c parsing/map_to_struct.c \
+				utils/str.c parsing/map_utils2.c
 
 SRCS        = $(addprefix $(SRC_PATH), $(SRC))
 
@@ -48,7 +51,7 @@ all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
-	@mkdir -p $(OBJ_PATH)/checks
+	@mkdir -p $(OBJ_PATH)/parsing
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(dir $@)

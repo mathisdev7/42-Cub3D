@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:09:45 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 10:58:33 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:39:21 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	read_lines(int fd, int *count, char *line, char *cleaned)
 	return (0);
 }
 
-int	check_map(char *map_path)
+char	**check_map(char *map_path)
 {
 	int		fd;
 	int		count;
@@ -90,21 +90,20 @@ int	check_map(char *map_path)
 
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
-		return (close(fd), 1);
+		return (close(fd), NULL);
 	line = get_next_line(fd);
 	cleaned = NULL;
 	if (line == NULL)
-		return (1);
+		return (close(fd), NULL);
 	count = 0;
 	if (read_lines(fd, &count, line, cleaned) != 0)
-		return (close(fd), gnl_cleanup(fd), 1);
+		return (close(fd), gnl_cleanup(fd), NULL);
 	map = parse_map(map_path);
 	if (map == NULL)
-		return (close(fd), gnl_cleanup(fd), 1);
-	if (check_map_content(map))
-		return (close(fd), gnl_cleanup(fd), ft_free_array(map), 1);
+		return (close(fd), gnl_cleanup(fd), NULL);
+	if (check_map_content(map) != 0)
+		return (close(fd), gnl_cleanup(fd), ft_free_array(map), NULL);
 	gnl_cleanup(fd);
 	close(fd);
-	ft_free_array(map);
-	return (0);
+	return (map);
 }

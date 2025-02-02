@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 10:48:54 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 10:56:37 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:51:33 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,24 @@
 
 char	**parse_map(char *map_path)
 {
-	char	**map;
-	char	*line;
-	int		fd;
-	int		count;
-	int		i;
+	t_parse_data	data;
 
-	map = allocate_map_array(map_path, &count);
-	if (!map)
-		return (NULL);
-	fd = open(map_path, O_RDONLY);
-	i = 0;
-	line = get_next_line(fd);
-	while (line)
+	ft_memset(&data, 0, sizeof(t_parse_data));
+	if (init_parse_data(&data, map_path))
+		return (cleanup_parse_data(&data), NULL);
+	if (skip_non_map_lines(data.fd, &data.line))
+		return (cleanup_parse_data(&data), NULL);
+	if (process_map_lines(data.fd, data.map, data.line))
+		return (cleanup_parse_data(&data), NULL);
+	close(data.fd);
+	data.k = -1;
+	while (data.map[++data.k])
 	{
-		map[i] = remove_spaces(line);
-		free(line);
-		if (!map[i])
-			return (ft_free_array(map), NULL);
-		line = get_next_line(fd);
-		i++;
+		if ((int)ft_strlen(data.map[data.k]) > data.max_len)
+			data.max_len = ft_strlen(data.map[data.k]);
 	}
-	map[i] = NULL;
-	close(fd);
-	return (map);
+	pad_map_lines(data.map, data.max_len);
+	return (data.map);
 }
 
 static int	validate_map_borders(char **map, int height, int width)

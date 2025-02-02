@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   str.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/01 23:53:15 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 12:55:57 by mazeghou         ###   ########.fr       */
+/*   Created: 2025/02/02 12:45:39 by mazeghou          #+#    #+#             */
+/*   Updated: 2025/02/02 12:45:43 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_free_array(char **array)
+char	*ft_strpad(char *str, int len, char pad)
 {
-	int	i;
+	char	*new;
+	int		i;
 
-	i = -1;
-	while (array[++i])
-		free(array[i]);
-	free(array);
-}
-
-void	free_map(char **map)
-{
-	int	i;
-
-	if (!map)
-		return ;
-	i = -1;
-	while (map[++i])
-		free(map[i]);
-	free(map);
+	new = malloc(len + 1);
+	i = 0;
+	while (str[i] && i < len)
+	{
+		new[i] = str[i];
+		i++;
+	}
+	while (i < len)
+		new[i++] = pad;
+	new[len] = '\0';
+	free(str);
+	return (new);
 }
