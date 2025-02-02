@@ -6,42 +6,11 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:28:40 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 14:59:55 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:05:39 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <stdlib.h>
-
-static t_map_info	*parse_assets(char *map_path, t_map_info *map_info)
-{
-	int		fd;
-	char	*line;
-
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-		return (close(fd), NULL);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (ft_strncmp(line, "NO", 2) == 0)
-			map_info->no_path = ft_strdup(remove_spaces(line + 3));
-		else if (ft_strncmp(line, "SO", 2) == 0)
-			map_info->so_path = ft_strdup(remove_spaces(line + 3));
-		else if (ft_strncmp(line, "WE", 2) == 0)
-			map_info->we_path = ft_strdup(remove_spaces(line + 3));
-		else if (ft_strncmp(line, "EA", 2) == 0)
-			map_info->ea_path = ft_strdup(remove_spaces(line + 3));
-		else if (ft_strncmp(line, "F", 1) == 0)
-			map_info->floor_color = ft_strdup(remove_spaces(line + 2));
-		else if (ft_strncmp(line, "C", 1) == 0)
-			map_info->ceiling_color = ft_strdup(remove_spaces(line + 2));
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (map_info);
-}
 
 static int	*find_player(char **map)
 {

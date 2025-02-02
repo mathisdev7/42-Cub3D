@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 14:58:37 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:06:09 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void		pad_map_lines(char **map, int max_len);
 int			init_parse_data(t_parse_data *data, char *map_path);
 void		cleanup_parse_data(t_parse_data *data);
 void		free_map(char **map);
+t_map_info	*parse_assets(char *map_path, t_map_info *map_info);
 
 #endif

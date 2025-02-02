@@ -6,7 +6,7 @@
 #    By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 20:34:26 by mazeghou          #+#    #+#              #
-#    Updated: 2025/02/02 12:52:02 by mazeghou         ###   ########.fr        #
+#    Updated: 2025/02/02 15:06:15 by mazeghou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC_PATH    = src/
 SRC         = main.c parsing/map.c parsing/args.c parsing/cardinals.c \
 				parsing/file.c utils/free.c parsing/map_content.c \
 				parsing/map_utils.c parsing/map_to_struct.c \
-				utils/str.c parsing/map_utils2.c
+				utils/str.c parsing/map_utils2.c parsing/assets.c
 
 SRCS        = $(addprefix $(SRC_PATH), $(SRC))
 

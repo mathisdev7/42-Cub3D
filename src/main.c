@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:21 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 14:59:17 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:03:07 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,11 @@ int	main(int argc, char **argv)
 	printf("floor color: %s\n", map_info.floor_color);
 	printf("ceiling color: %s\n", map_info.ceiling_color);
 	free_map(map);
+	free(map_info.no_path);
+	free(map_info.so_path);
+	free(map_info.we_path);
+	free(map_info.ea_path);
+	free(map_info.floor_color);
+	free(map_info.ceiling_color);
 	return (0);
 }
