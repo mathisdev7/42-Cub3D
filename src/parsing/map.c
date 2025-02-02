@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:09:45 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 12:39:21 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 16:08:05 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,19 @@ int	is_rgb(char *line)
 		tab_size++;
 	if (tab_size != 3)
 		return (ft_free_array(line_splitted), 0);
-	i = 0;
-	j = 0;
-	while (line_splitted[i])
+	i = -1;
+	j = -1;
+	while (line_splitted[++i])
 	{
-		c = line_splitted[i][j];
-		if (!ft_isdigit(c))
-			return (ft_free_array(line_splitted), 0);
-		i++;
-		j++;
+		j = -1;
+		while (line_splitted[i][++j])
+		{
+			c = line_splitted[i][j];
+			if (!ft_isdigit(c))
+				return (ft_free_array(line_splitted), 0);
+		}
 	}
-	ft_free_array(line_splitted);
-	return (1);
+	return (ft_free_array(line_splitted), 1);
 }
 
 int	check_lines(char *line)
@@ -46,7 +47,7 @@ int	check_lines(char *line)
 	{
 		if (line[1] != ' ')
 			return (0);
-		if (!is_rgb(line + 3))
+		if (!is_rgb(line + 2))
 			return (0);
 		return (1);
 	}
@@ -62,6 +63,8 @@ int	read_lines(int fd, int *count, char *line, char *cleaned)
 		line = cleaned;
 		if (!line)
 			return (free(line), 1);
+		if (line[0] == '\0')
+			line = remove_spaces(get_next_line(fd));
 		if (line[0] == 'O' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E'
 			|| line[0] == 'N')
 		{

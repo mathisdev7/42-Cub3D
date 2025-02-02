@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 10:53:24 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 12:53:55 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 16:01:24 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,23 @@ char	**allocate_map_array(char *map_path, int *count)
 
 int	skip_non_map_lines(int fd, char **line)
 {
-	while (*line && (*line)[0] != '1')
+	char	*cleaned;
+
+	while (*line)
 	{
+		cleaned = remove_spaces(*line);
+		if (cleaned && cleaned[0] == '1')
+		{
+			free(cleaned);
+			return (0);
+		}
 		free(*line);
+		free(cleaned);
 		*line = get_next_line(fd);
 		if (!*line)
 			return (1);
 	}
-	return (0);
+	return (1);
 }
 
 int	process_map_lines(int fd, char **map, char *line)

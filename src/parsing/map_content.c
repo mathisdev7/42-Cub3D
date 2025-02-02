@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 10:48:54 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 12:51:33 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 16:18:11 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ char	**parse_map(char *map_path)
 
 static int	validate_map_borders(char **map, int height, int width)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	c;
 
 	i = -1;
 	while (++i < height)
@@ -45,12 +46,15 @@ static int	validate_map_borders(char **map, int height, int width)
 		j = -1;
 		while (++j < width)
 		{
-			if ((i == 0 || i == height - 1 || j == 0 || j == width - 1)
-				&& map[i][j] != '1' && map[i][j] != ' ')
-				return (1);
-			if (map[i][j] == '0' && (i == 0 || i == height - 1 || j == 0
-					|| j == width - 1))
-				return (1);
+			if ((i == 0 || i == height - 1 || j == 0 || j == width - 1))
+			{
+				if (j < (int)ft_strlen(map[i]))
+					c = map[i][j];
+				else
+					c = ' ';
+				if (c != '1' && c != ' ')
+					return (1);
+			}
 		}
 	}
 	return (0);
@@ -103,11 +107,15 @@ int	check_map_content(char **map)
 	int	height;
 	int	width;
 	int	error;
+	int	i;
 
 	height = 0;
 	while (map[height])
 		height++;
-	width = ft_strlen(map[0]);
+	width = 0;
+	i = -1;
+	while (map[++i])
+		width = fmax(width, (int)ft_strlen(map[i]));
 	error = 0;
 	error += validate_map_borders(map, height, width);
 	error += validate_player_position(map, height, width);

@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 20:06:20 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 20:12:18 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:22:03 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	check_file(char *arg)
 {
 	int	fd;
 
-	if (is_dir(arg))
+	if (is_dir(arg + 3))
 		return (1);
-	fd = open(arg, O_RDONLY);
+	fd = open(arg + 3, O_RDONLY);
 	if (fd == -1)
 		return (1);
 	close(fd);
-	if (!is_xpm_file(arg))
+	if (!is_xpm_file(arg + 3))
 		return (1);
 	return (0);
 }

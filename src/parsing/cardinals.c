@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 01:36:46 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/01 23:52:48 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/02 16:18:40 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@ char	*remove_spaces(char *line)
 		return (NULL);
 	while (i < ft_strlen(line))
 	{
-		if (line[i] == '\n' || line[i] == '\t' || line[i] == '\v'
-			|| line[i] == '\f' || line[i] == '\r')
+		if ((line[i] == ' ' && line[i - 1] != 'F' && line[i - 1] != 'C'
+				&& (ft_strchr("NSEW10FC", line[i + 1]) || ft_strchr(",", line[i
+							- 1]))) || line[i] == '\n' || line[i] == '\t'
+			|| line[i] == '\v' || line[i] == '\f' || line[i] == '\r'
+			|| (line[i] == ' ' && line[i + 1] == ' '))
 			i++;
-		new_line[j++] = line[i++];
+		else
+			new_line[j++] = line[i++];
 	}
 	new_line[j] = '\0';
 	return (new_line);
@@ -54,14 +58,14 @@ int	check_cardinal_points(char *line)
 	{
 		if (line[2] != ' ')
 			return (0);
-		temp = ft_strdup(line + 3);
+		temp = ft_strdup(line);
 		if (!temp)
 			return (0);
 		path = remove_spaces(temp);
 		free(temp);
 		if (!path)
 			return (0);
-		if (!file_exists(path))
+		if (!file_exists(path + 3))
 			return (free(path), 0);
 		if (check_file(path))
 			return (free(path), 0);
