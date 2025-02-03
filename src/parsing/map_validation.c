@@ -6,47 +6,64 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 05:01:55 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 10:07:40 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:16:30 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-size_t get_map_size_2(char **map)
+static void	count_border_chars(char **map, t_rectangle_data *data)
 {
-	size_t i = 0;
-	while (map[i])
-		i++;
-	return (i);
+	data->i = 0;
+	while (map[data->i])
+	{
+		data->j = 0;
+		while (map[data->i][data->j])
+		{
+			if (data->i == 0)
+				data->top++;
+			else if (data->i == get_map_size_2(map) - 1)
+				data->bottom++;
+			data->j++;
+		}
+		data->i++;
+	}
 }
 
-size_t is_map_rectangle(char **map)
+static int	check_rectangle_consistency(char **map, size_t ref_len)
 {
 	t_rectangle_data	data;
+	char				*cleaned;
 
 	ft_memset(&data, 0, sizeof(t_rectangle_data));
-	while (map[data.i])
-	{
-		data.j = 0;
-		while (map[data.i][data.j])
-		{
-			if (data.i == 0)
-				data.top++;
-			else if (data.i == get_map_size_2(map) - 1)
-				data.bottom++;
-			data.j++;
-		}
-		data.i++;
-	}
-	data.j = ft_strlen(remove_spaces(map[0]));
 	data.i = 1;
 	while (map[data.i])
 	{
-		if (data.j != ft_strlen(remove_spaces(map[data.i])))
+		cleaned = remove_spaces(map[data.i]);
+		if (ref_len != ft_strlen(cleaned))
+		{
+			free(cleaned);
 			return (1);
+		}
+		free(cleaned);
 		data.i++;
 	}
-	return (data.top != data.bottom);
+	return (0);
+}
+
+size_t	is_map_rectangle(char **map)
+{
+	t_rectangle_data	data;
+	char				*cleaned;
+	size_t				ref_len;
+
+	ft_memset(&data, 0, sizeof(t_rectangle_data));
+	count_border_chars(map, &data);
+	cleaned = remove_spaces(map[0]);
+	ref_len = ft_strlen(cleaned);
+	free(cleaned);
+	return (check_rectangle_consistency(map, ref_len)
+		|| (data.top != data.bottom));
 }
 
 static int	check_map_borders(char **map)
@@ -80,5 +97,7 @@ int	validate_map(char **map)
 		return (1);
 	}
 	else
-		return (1);
+	{
+		return (0);
+	}
 }

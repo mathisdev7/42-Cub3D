@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 08:12:02 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:16:56 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int			check_lines(char *line);
 int			skip_non_map_lines(int fd, char **line);
 int			process_map_lines(int fd, char **map, char *line);
 char		*remove_map_spaces(char *line);
+char		**ft_arraydup(char **array);
 t_map_info	*parse_assets(char *map_path, t_map_info *map_info);
+size_t		get_map_size_2(char **map);
 
 #endif

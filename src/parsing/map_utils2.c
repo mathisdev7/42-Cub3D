@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:51:44 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 08:11:33 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:07:08 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*remove_map_spaces(char *line)
 	if (!new_line)
 		return (NULL);
 	if (!line)
-		return (NULL);
+		return (free(new_line), NULL);
 	while (i < ft_strlen(line))
 	{
 		if ((i > 0 && line[i] == ' ' && line[i - 1] != '1') || line[i] == '\n'
@@ -86,7 +86,7 @@ int	init_parse_data(t_parse_data *data, char *map_path)
 	data->fd = open(data->map_path, O_RDONLY);
 	if (data->fd < 0)
 		return (1);
-	data->line = remove_spaces(get_next_line(data->fd));
+	data->line = get_next_line(data->fd);
 	data->max_len = 0;
 	data->k = 0;
 	return (0);
