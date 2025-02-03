@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:26:01 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 14:55:38 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:02:48 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ typedef struct s_map_info
 	char	*floor_color;
 	char	*ceiling_color;
 }			t_map_info;
+
+typedef struct s_rectangle_data
+{
+	size_t	i;
+	size_t	j;
+	size_t	top;
+	size_t	bottom;
+}	t_rectangle_data;
 
 typedef struct s_parse_data
 {
