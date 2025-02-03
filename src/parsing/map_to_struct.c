@@ -6,44 +6,44 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:28:40 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 15:05:39 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/03 08:09:08 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	*find_player(char **map)
+int	*find_player(char **map)
 {
-	int	i;
-	int	j;
-	int	*player;
+	size_t	i;
+	size_t	j;
+	int		*player;
 
 	player = malloc(sizeof(int) * 2);
 	if (!player)
 		return (NULL);
-	i = 0;
-	while (map[i])
+	i = -1;
+	while (map[++i])
 	{
-		j = 0;
-		while (map[i][j])
+		j = -1;
+		while (map[i][++j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
+			if (ft_strchr("NSEW", map[i][j]))
 			{
+				if (i == 0 || j == 0 || i == ft_array_len(map) - 1
+					|| j >= ft_strlen(map[i]) - 1)
+					return (free(player), NULL);
 				player[0] = i;
 				player[1] = j;
 				return (player);
 			}
-			j++;
 		}
-		i++;
 	}
 	return (free(player), NULL);
 }
 
-static int	ft_array_len(char **array)
+size_t	ft_array_len(char **array)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (array[i])
@@ -56,6 +56,12 @@ void	set_map_info(t_map_info *map_info, char **map, int max_width)
 	int	*player_coords;
 
 	player_coords = find_player(map);
+	if (!player_coords)
+	{
+		map_info->player_x = -1;
+		map_info->player_y = -1;
+		return ;
+	}
 	map_info->map = map;
 	map_info->map_width = max_width;
 	map_info->map_height = ft_array_len(map);

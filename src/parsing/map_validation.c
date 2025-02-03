@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/01 23:53:15 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 07:48:38 by mazeghou         ###   ########.fr       */
+/*   Created: 2025/02/03 05:01:55 by mazeghou          #+#    #+#             */
+/*   Updated: 2025/02/03 07:33:08 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_free_array(char **array)
+static int	check_map_borders(char **map)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
 
-	i = -1;
-	while (array[++i])
-		free(array[i]);
-	free(array);
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (i == 0 || i == ft_array_len(map) - 1 || j == 0
+				|| j == ft_strlen(map[i]) - 1)
+				if (map[i][j] != '1')
+					return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
-void	free_map(char **map)
+int	validate_map(char **map)
 {
-	int	i;
-
-	if (!map)
-		return ;
-	i = -1;
-	while (map[++i])
-		free(map[i]);
-	free(map);
+	if (check_map_borders(map))
+		return (0);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:21 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 15:03:07 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/03 08:03:55 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(int argc, char **argv)
 	if (map == NULL)
 		return (printf("error map\n"), 0);
 	map_info = map_to_struct(map, argv[1]);
+	for (size_t i = 0; i < ft_array_len(map); i++)
+		printf("'%s'\n", map[i]);
 	printf("map width: %d\n", map_info.map_width);
 	printf("map height: %d\n", map_info.map_height);
 	printf("player x: %d\n", map_info.player_x);

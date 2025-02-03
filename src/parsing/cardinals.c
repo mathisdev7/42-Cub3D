@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 01:36:46 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/02 16:18:40 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/03 08:12:44 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*remove_spaces(char *line)
 		return (NULL);
 	while (i < ft_strlen(line))
 	{
-		if ((line[i] == ' ' && line[i - 1] != 'F' && line[i - 1] != 'C'
+		if ((i > 0 && line[i] == ' ' && line[i - 1] != 'F' && line[i - 1] != 'C'
 				&& (ft_strchr("NSEW10FC", line[i + 1]) || ft_strchr(",", line[i
 							- 1]))) || line[i] == '\n' || line[i] == '\t'
 			|| line[i] == '\v' || line[i] == '\f' || line[i] == '\r'
