@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:28:40 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 08:09:08 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:33:47 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_map_info	map_to_struct(char **map, char *map_path)
 	set_map_info(&map_info, map, max_width);
 	player_coords = find_player(map);
 	parse_assets(map_path, &map_info);
+	parse_color(map_path, &map_info);
 	if (player_coords)
 	{
 		map_info.player_x = player_coords[0];

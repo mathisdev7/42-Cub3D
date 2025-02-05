@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 14:16:56 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:30:24 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 
 int			check_args(int argc, char **argv);
 char		**check_map(char *map_path);
-int			check_cardinal_points(char *line);
 int			check_file(char *arg);
 char		*remove_spaces(char *line);
 void		ft_free_array(char **array);
@@ -53,5 +52,9 @@ char		*remove_map_spaces(char *line);
 char		**ft_arraydup(char **array);
 t_map_info	*parse_assets(char *map_path, t_map_info *map_info);
 size_t		get_map_size_2(char **map);
+t_map_info	*set_cardinals_path(char *line, t_map_info *map_info);
+t_map_info	*parse_color(char *line, t_map_info *map_info);
+int			file_exists(char *path);
+char		*ft_strstr(char *str, char *to_find);
 
 #endif

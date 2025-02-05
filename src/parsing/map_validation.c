@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 05:01:55 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 14:16:30 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:59:34 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int	check_map_borders(char **map)
 
 int	validate_map(char **map)
 {
-	if (!is_map_rectangle(map))
+	if (is_map_rectangle(map))
 	{
 		if (!check_map_borders(map))
 			return (0);

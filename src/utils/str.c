@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:45:39 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 08:03:34 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:45:24 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,28 @@ int	is_rgb(char *line)
 		}
 	}
 	return (ft_free_array(line_splitted), 1);
+}
+
+char	*ft_strstr(char *str, char *to_find)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		j = 0;
+		while (to_find[j] == str[i + j])
+		{
+			if (to_find[j + 1] == '\0')
+			{
+				return (str + i);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 char	*ft_strpad(char *str, int len, char pad)

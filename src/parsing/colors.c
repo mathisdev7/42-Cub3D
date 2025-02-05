@@ -1,43 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assets.c                                           :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 15:05:31 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/05 15:49:35 by mazeghou         ###   ########.fr       */
+/*   Created: 2025/02/05 15:06:12 by mazeghou          #+#    #+#             */
+/*   Updated: 2025/02/05 15:48:30 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-char	*parse_cardinal_line(char *line)
+t_map_info	*set_color(char *line, t_map_info *map_info)
 {
-	char	*processed_line;
-
-	processed_line = remove_spaces(line);
+	if (ft_strstr(line, "F"))
+		map_info->floor_color = remove_spaces(line + 2);
+	else if (ft_strstr(line, "C"))
+		map_info->ceiling_color = remove_spaces(line + 2);
 	free(line);
-	return (processed_line);
+	return (map_info);
 }
 
-t_map_info	*parse_assets(char *map_path, t_map_info *map_info)
+t_map_info	*parse_color(char *line, t_map_info *map_info)
 {
 	int		fd;
 	char	*raw_line;
 	char	*processed_line;
 
-	fd = open(map_path, O_RDONLY);
+	fd = open(line, O_RDONLY);
 	if (fd == -1)
 		return (close(fd), NULL);
 	raw_line = get_next_line(fd);
 	while (raw_line != NULL)
 	{
-		if (ft_strstr(raw_line, "NO") || ft_strstr(raw_line, "SO")
-			|| ft_strstr(raw_line, "WE") || ft_strstr(raw_line, "EA"))
+		if (ft_strstr(raw_line, "F") || ft_strstr(raw_line, "C"))
 		{
-			processed_line = parse_cardinal_line(raw_line);
-			map_info = set_cardinals_path(processed_line, map_info);
+			processed_line = remove_spaces(raw_line);
+			map_info = set_color(processed_line, map_info);
+			free(raw_line);
 			raw_line = get_next_line(fd);
 		}
 		else
