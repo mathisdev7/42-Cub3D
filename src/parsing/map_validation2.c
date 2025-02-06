@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:12:59 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/06 21:15:52 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:19:41 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,4 @@ char	**copy_map(char **map)
 	}
 	map_copy[i] = NULL;
 	return (map_copy);
-}
-
-int	check_map_borders_not_rectangular(char **map)
-{
-	size_t	i;
-
-	i = 0;
-	while (map[i])
-	{
-		if (map[i][0] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
-			return (1);
-		i++;
-	}
-	return (0);
 }

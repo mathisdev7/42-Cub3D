@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/06 21:15:28 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:20:56 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ t_map_info	*set_cardinals_path(char *line, t_map_info *map_info);
 t_map_info	*parse_color(char *line, t_map_info *map_info);
 int			file_exists(char *path);
 char		*ft_strstr(char *str, char *to_find);
-int			check_map_borders_not_rectangular(char **map);
 char		**copy_map(char **map);
 
 #endif

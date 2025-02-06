@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 05:01:55 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/06 21:14:43 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:19:43 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	validate_map(char **map)
 	}
 	else
 	{
-		valid = check_map_borders_not_rectangular(map_copy);
+		valid = check_map_borders(map_copy);
 		free_map(map_copy);
 		return (valid);
 	}
