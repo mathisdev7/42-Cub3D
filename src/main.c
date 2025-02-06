@@ -6,11 +6,22 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:21 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/05 15:41:42 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:31:19 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	free_all(char **map, t_map_info *map_info)
+{
+	free_map(map);
+	free(map_info->no_path);
+	free(map_info->so_path);
+	free(map_info->we_path);
+	free(map_info->ea_path);
+	free(map_info->floor_color);
+	free(map_info->ceiling_color);
+}
 
 int	main(int argc, char **argv)
 {
@@ -26,6 +37,8 @@ int	main(int argc, char **argv)
 	if (!file_exists(map_info.no_path) || !file_exists(map_info.so_path)
 		|| !file_exists(map_info.we_path) || !file_exists(map_info.ea_path))
 		return (printf("error assets\n"), 0);
+	if (check_map_content(map))
+		return (free_all(map, &map_info), printf("error map content\n"), 0);
 	for (size_t i = 0; i < ft_array_len(map); i++)
 		printf("'%s'\n", map[i]);
 	printf("map width: %d\n", map_info.map_width);
@@ -38,12 +51,6 @@ int	main(int argc, char **argv)
 	printf("ea path: %s\n", map_info.ea_path);
 	printf("floor color: %s\n", map_info.floor_color);
 	printf("ceiling color: %s\n", map_info.ceiling_color);
-	free_map(map);
-	free(map_info.no_path);
-	free(map_info.so_path);
-	free(map_info.we_path);
-	free(map_info.ea_path);
-	free(map_info.floor_color);
-	free(map_info.ceiling_color);
+	free_all(map, &map_info);
 	return (0);
 }
