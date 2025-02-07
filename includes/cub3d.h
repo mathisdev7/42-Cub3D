@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/07 12:06:43 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:45:50 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "structures.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# define MOVESPEED 0.05
 
 int			check_args(int argc, char **argv);
 char		**check_map(char *map_path);
@@ -57,5 +61,12 @@ char		*ft_strstr(char *str, char *to_find);
 char		**copy_map(char **map);
 int			check_map_player(char **map, t_map_info *map_info);
 int			is_map_last(char *map_path, char **map);
+void		free_int_array(int **array, int size);
+t_game		*init_game(t_map_info map_info);
+void		render_game(t_game *game);
+void		raycasting(t_raycast *raycast, t_game *game);
+void		init_raycast(t_raycast *raycast);
+void		init_screen_buffer(t_game *game);
+void		*ft_calloc(size_t count, size_t size);
 
 #endif

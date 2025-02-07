@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 23:53:15 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 07:48:38 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:45:46 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,21 @@ void	ft_free_array(char **array)
 	i = -1;
 	while (array[++i])
 		free(array[i]);
+	free(array);
+}
+
+void	free_int_array(int **array, int size)
+{
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (i < size)
+	{
+		free(array[i]);
+		i++;
+	}
 	free(array);
 }
 

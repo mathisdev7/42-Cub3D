@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:21 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/07 12:38:26 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:53:53 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	main(int argc, char **argv)
 {
 	char		**map;
 	t_map_info	map_info;
+	t_game		*game;
 
 	if (check_args(argc, argv))
 		return (printf("error args\n"), 0);
@@ -77,7 +78,9 @@ int	main(int argc, char **argv)
 	if (map == NULL)
 		return (printf("error map\n"), 0);
 	map_info = map_to_struct(map, argv[1]);
-	if (!map_info.no_path || !map_info.so_path || !map_info.we_path || !map_info.ea_path || !map_info.floor_color || !map_info.ceiling_color)
+	if (!map_info.no_path || !map_info.so_path || !map_info.we_path
+		|| !map_info.ea_path || !map_info.floor_color
+		|| !map_info.ceiling_color)
 		return (free_all(map, &map_info), printf("error assets\n"), 0);
 	if (ft_strstr(map_info.no_path, ".xpm") == NULL
 		|| ft_strstr(map_info.so_path, ".xpm") == NULL
@@ -92,6 +95,9 @@ int	main(int argc, char **argv)
 	if (!check_color(map_info.floor_color)
 		|| !check_color(map_info.ceiling_color))
 		return (free_all(map, &map_info), printf("error color\n"), 0);
+	game = NULL;
+	game = init_game(map_info);
+	render_game(game);
 	for (size_t i = 0; i < ft_array_len(map); i++)
 		printf("'%s'\n", map[i]);
 	printf("player dir x: %f\n", map_info.player_dir_x);

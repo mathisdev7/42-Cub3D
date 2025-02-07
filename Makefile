@@ -6,7 +6,7 @@
 #    By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 20:34:26 by mazeghou          #+#    #+#              #
-#    Updated: 2025/02/07 12:07:59 by mazeghou         ###   ########.fr        #
+#    Updated: 2025/02/07 19:45:57 by mazeghou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC         = main.c parsing/map.c parsing/args.c parsing/cardinals.c \
 				utils/str.c parsing/map_utils2.c parsing/assets.c \
 				parsing/map_validation.c utils/array_utils.c \
 				parsing/set.c parsing/colors.c parsing/map_validation2.c \
-				parsing/player.c parsing/map_last.c
+				parsing/player.c parsing/map_last.c init/init.c \
+				raycasting.c render.c
 
 SRCS        = $(addprefix $(SRC_PATH), $(SRC))
 

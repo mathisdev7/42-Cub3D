@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:09:45 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/06 21:28:55 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:53:13 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	init_check_map_data(t_check_map_data *data, char *map_path)
 		return (1);
 	if (get_map_size(map_path) == 0)
 		return (1);
-	data->map = malloc(sizeof(char *) * get_map_size(map_path));
+	data->map = malloc(sizeof(char *) * (get_map_size(map_path) + 1));
 	if (!data->map)
 	{
 		close(data->fd);
