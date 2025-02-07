@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:21 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/05 15:41:42 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:30:41 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	char		**map;
 	t_map_info	map_info;
+	t_game		*game;
 
 	if (check_args(argc, argv))
 		return (printf("error args\n"), 0);
@@ -26,18 +27,9 @@ int	main(int argc, char **argv)
 	if (!file_exists(map_info.no_path) || !file_exists(map_info.so_path)
 		|| !file_exists(map_info.we_path) || !file_exists(map_info.ea_path))
 		return (printf("error assets\n"), 0);
-	for (size_t i = 0; i < ft_array_len(map); i++)
-		printf("'%s'\n", map[i]);
-	printf("map width: %d\n", map_info.map_width);
-	printf("map height: %d\n", map_info.map_height);
-	printf("player x: %d\n", map_info.player_x);
-	printf("player y: %d\n", map_info.player_y);
-	printf("no path: %s\n", map_info.no_path);
-	printf("so path: %s\n", map_info.so_path);
-	printf("we path: %s\n", map_info.we_path);
-	printf("ea path: %s\n", map_info.ea_path);
-	printf("floor color: %s\n", map_info.floor_color);
-	printf("ceiling color: %s\n", map_info.ceiling_color);
+	game = NULL;
+	game = init_game(map_info);
+	render_game(game);
 	free_map(map);
 	free(map_info.no_path);
 	free(map_info.so_path);
@@ -45,5 +37,7 @@ int	main(int argc, char **argv)
 	free(map_info.ea_path);
 	free(map_info.floor_color);
 	free(map_info.ceiling_color);
+	free(game->screen_buffer);
+	free(game);
 	return (0);
 }

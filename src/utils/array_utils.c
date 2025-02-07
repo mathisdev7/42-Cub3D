@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:42:19 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 14:16:46 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:23:38 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,26 @@ char	**ft_arraydup(char **array)
 	}
 	new_array[count] = NULL;
 	return (new_array);
+}
+
+void	ft_bzero(void *b, size_t n)
+{
+	unsigned char	*dest;
+	size_t			i;
+
+	dest = b;
+	i = 0;
+	while (i++ < n)
+		*dest++ = 0;
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
+
+	ptr = (void*)malloc(count * size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, count);
+	return (ptr);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/05 15:30:24 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:22:52 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include <X11/keysym.h>
+#include <X11/X.h>
+
+# define MOVESPEED 0.0125
 
 int			check_args(int argc, char **argv);
 char		**check_map(char *map_path);
 int			check_file(char *arg);
 char		*remove_spaces(char *line);
 void		ft_free_array(char **array);
+void		free_int_array(int **array, int size);
 int			check_map_content(char **map);
 char		**parse_map(char *map_path);
 size_t		get_map_size(char *map_path);
@@ -56,5 +61,11 @@ t_map_info	*set_cardinals_path(char *line, t_map_info *map_info);
 t_map_info	*parse_color(char *line, t_map_info *map_info);
 int			file_exists(char *path);
 char		*ft_strstr(char *str, char *to_find);
+t_game		*init_game(t_map_info map_info);
+void		render_game(t_game *game);
+void		raycasting(t_raycast *raycast, t_game *game);
+void		init_raycast(t_raycast *raycast);
+void 		init_screen_buffer(t_game *game);
+void		*ft_calloc(size_t count, size_t size);
 
 #endif
