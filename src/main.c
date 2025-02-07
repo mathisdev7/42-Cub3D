@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:21 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/06 21:30:17 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:14:35 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,29 @@ int	main(int argc, char **argv)
 	if (map == NULL)
 		return (printf("error map\n"), 0);
 	map_info = map_to_struct(map, argv[1]);
+	if (ft_strstr(map_info.no_path, ".xpm") == NULL
+		|| ft_strstr(map_info.so_path, ".xpm") == NULL
+		|| ft_strstr(map_info.we_path, ".xpm") == NULL
+		|| ft_strstr(map_info.ea_path, ".xpm") == NULL)
+		return (printf("error assets\n"), 0);
 	if (!file_exists(map_info.no_path) || !file_exists(map_info.so_path)
 		|| !file_exists(map_info.we_path) || !file_exists(map_info.ea_path))
 		return (printf("error assets\n"), 0);
-	if (check_map_content(map))
+	if (check_map_content(map, &map_info, argv[1]))
 		return (free_all(map, &map_info), printf("error map content\n"), 0);
 	if (!check_color(map_info.floor_color)
 		|| !check_color(map_info.ceiling_color))
 		return (free_all(map, &map_info), printf("error color\n"), 0);
 	for (size_t i = 0; i < ft_array_len(map); i++)
 		printf("'%s'\n", map[i]);
+	printf("player dir x: %f\n", map_info.player_dir_x);
+	printf("player dir y: %f\n", map_info.player_dir_y);
+	printf("player plane x: %f\n", map_info.player_plane_x);
+	printf("player plane y: %f\n", map_info.player_plane_y);
 	printf("map width: %d\n", map_info.map_width);
 	printf("map height: %d\n", map_info.map_height);
-	printf("player x: %d\n", map_info.player_x);
-	printf("player y: %d\n", map_info.player_y);
+	printf("player x: %f\n", map_info.player_x);
+	printf("player y: %f\n", map_info.player_y);
 	printf("no path: %s\n", map_info.no_path);
 	printf("so path: %s\n", map_info.so_path);
 	printf("we path: %s\n", map_info.we_path);

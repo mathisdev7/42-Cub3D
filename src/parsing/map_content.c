@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 10:48:54 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 07:27:48 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:06:51 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,30 @@ char	**parse_map(char *map_path)
 	return (data.map);
 }
 
-int	check_map_content(char **map)
+int	check_map_elements(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '0' || map[i][j] == '1' || map[i][j] == 'N'
+				|| map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W'
+				|| map[i][j] == ' ')
+				j++;
+			else
+				return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	check_map_content(char **map, t_map_info *map_info, char *map_path)
 {
 	int	height;
 	int	width;
@@ -49,5 +72,8 @@ int	check_map_content(char **map)
 	while (map[++i])
 		width = fmax(width, (int)ft_strlen(map[i]));
 	error = validate_map(map);
+	error += check_map_player(map, map_info);
+	error += check_map_elements(map);
+	error += is_map_last(map_path, map);
 	return (error);
 }

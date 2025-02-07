@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:26:01 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/05 15:42:08 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:04:57 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@ typedef struct s_map_info
 	char	**map;
 	int		map_width;
 	int		map_height;
-	int		player_x;
-	int		player_y;
+	double	player_x;
+	double	player_y;
+	char	player_direction;
+	double	player_dir_x;
+	double	player_dir_y;
+	double	player_plane_x;
+	double	player_plane_y;
 	char	*no_path;
 	char	*so_path;
 	char	*we_path;
@@ -57,5 +62,12 @@ typedef struct s_check_map_data
 	int		i;
 	int		max_len;
 }			t_check_map_data;
+
+typedef struct s_direction
+{
+	char	dir;
+	int		x;
+	int		y;
+}			t_direction;
 
 #endif
