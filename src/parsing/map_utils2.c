@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:51:44 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/05 14:54:50 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:59:12 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ char	*remove_map_spaces(char *line)
 		return (free(new_line), NULL);
 	while (i < ft_strlen(line))
 	{
-		if ((i > 0 && line[i] == ' ' && line[i - 1] != '1') || line[i] == '\n'
-			|| line[i] == '\t' || line[i] == '\v' || line[i] == '\f'
-			|| line[i] == '\r' || (line[i] == ' ' && line[i + 1] == ' '))
+		if ((i > 0 && line[i] == ' ' && line[i - 1] != '1' && line[i
+					- 1] != '0') || line[i] == '\n' || line[i] == '\t'
+			|| line[i] == '\v' || line[i] == '\f' || line[i] == '\r'
+			|| (line[i] == ' ' && line[i + 1] == ' '))
 			i++;
 		else
 			new_line[j++] = line[i++];

@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/07 12:22:52 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:06:43 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			check_file(char *arg);
 char		*remove_spaces(char *line);
 void		ft_free_array(char **array);
 void		free_int_array(int **array, int size);
-int			check_map_content(char **map);
+int			check_map_content(char **map, t_map_info *map_info, char *map_path);
 char		**parse_map(char *map_path);
 size_t		get_map_size(char *map_path);
 char		**allocate_map_array(char *map_path);
@@ -49,8 +49,6 @@ int			init_parse_data(t_parse_data *data, char *map_path);
 void		cleanup_parse_data(t_parse_data *data);
 void		free_map(char **map);
 int			is_rgb(char *line);
-int			read_lines(int fd, int *count, char *line, char *cleaned);
-int			check_lines(char *line);
 int			skip_non_map_lines(int fd, char **line);
 int			process_map_lines(int fd, char **map, char *line);
 char		*remove_map_spaces(char *line);
@@ -61,6 +59,9 @@ t_map_info	*set_cardinals_path(char *line, t_map_info *map_info);
 t_map_info	*parse_color(char *line, t_map_info *map_info);
 int			file_exists(char *path);
 char		*ft_strstr(char *str, char *to_find);
+char		**copy_map(char **map);
+int			check_map_player(char **map, t_map_info *map_info);
+int			is_map_last(char *map_path, char **map);
 t_game		*init_game(t_map_info map_info);
 void		render_game(t_game *game);
 void		raycasting(t_raycast *raycast, t_game *game);

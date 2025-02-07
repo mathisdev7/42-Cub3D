@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:28:40 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/05 15:33:47 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:48:08 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ void	set_map_info(t_map_info *map_info, char **map, int max_width)
 	free(player_coords);
 }
 
+void	set_player_position(t_map_info *map_info, int *player_coords)
+{
+	map_info->player_x = player_coords[0];
+	map_info->player_y = player_coords[1];
+	free(player_coords);
+}
+
 t_map_info	map_to_struct(char **map, char *map_path)
 {
 	t_map_info	map_info;
@@ -87,11 +94,7 @@ t_map_info	map_to_struct(char **map, char *map_path)
 	parse_assets(map_path, &map_info);
 	parse_color(map_path, &map_info);
 	if (player_coords)
-	{
-		map_info.player_x = player_coords[0];
-		map_info.player_y = player_coords[1];
-		free(player_coords);
-	}
+		set_player_position(&map_info, player_coords);
 	else
 	{
 		map_info.player_x = -1;

@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 05:01:55 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/05 15:59:34 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:19:43 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ size_t	is_map_rectangle(char **map)
 	cleaned = remove_spaces(map[0]);
 	ref_len = ft_strlen(cleaned);
 	free(cleaned);
-	return (check_rectangle_consistency(map, ref_len)
-		|| (data.top != data.bottom));
+	return (check_rectangle_consistency(map, ref_len));
 }
 
 static int	check_map_borders(char **map)
@@ -90,14 +89,22 @@ static int	check_map_borders(char **map)
 
 int	validate_map(char **map)
 {
-	if (is_map_rectangle(map))
+	char	**map_copy;
+	int		valid;
+
+	valid = 0;
+	map_copy = copy_map(map);
+	if (!is_map_rectangle(map))
 	{
+		free_map(map_copy);
 		if (!check_map_borders(map))
 			return (0);
 		return (1);
 	}
 	else
 	{
-		return (0);
+		valid = check_map_borders(map_copy);
+		free_map(map_copy);
+		return (valid);
 	}
 }
