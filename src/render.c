@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:53:00 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/08 11:55:18 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/09 00:43:14 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int	key_press_handler(int key, void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	if (key == XK_w)
+	if (key == XK_z)
 		game->player_move_y = 1;
-	if (key == XK_a)
+	if (key == XK_q)
 		game->player_move_x = -1;
 	if (key == XK_s)
 		game->player_move_y = -1;
@@ -51,11 +51,11 @@ static int	key_release_handler(int key, void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	if (key == XK_w && game->player_move_y == 1)
+	if (key == XK_z && game->player_move_y == 1)
 		game->player_move_y = 0;
 	if (key == XK_s && game->player_move_y == -1)
 		game->player_move_y = 0;
-	if (key == XK_a && game->player_move_x == -1)
+	if (key == XK_q && game->player_move_x == -1)
 		game->player_move_x += 1;
 	if (key == XK_d && game->player_move_x == 1)
 		game->player_move_x -= 1;

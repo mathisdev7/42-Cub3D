@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 22:01:23 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/08 11:58:13 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/09 00:43:57 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	dda_algorithm(t_raycast *raycast, t_game *game)
 			raycast->map_y += raycast->step_y;
 			raycast->side = 1;
 		}
-		if (game->map_info.map[raycast->map_x][raycast->map_y] == '1')
+		if (game->map_info.map[raycast->map_y][raycast->map_x] == '1')
 			raycast->hit = 1;
 	}
 	if (raycast->side == 0)
@@ -121,8 +121,7 @@ void	store_wall_pixels(t_game *game, int x, t_raycast *raycast)
 		if (raycast->tex_x >= 0 && raycast->tex_x < tex->width)
 		{
 			color = tex->addr[tex->width * tex_y + raycast->tex_x];
-			// Optionnel : ajout d'ombrage selon le côté du mur
-			if (raycast->side == 1) // Si c'est un mur vertical
+			if (raycast->side == 1)
 				color = (color >> 1) & 8355711;
 			if (color > 0 && x >= 0 && x < game->screen_width && y >= 0)
 				game->screen_buffer[y][x] = color;
