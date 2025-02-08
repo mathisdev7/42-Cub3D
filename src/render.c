@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:53:00 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/07 19:44:50 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/08 11:55:18 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	set_pixel_color(t_game *game, int x, int y, t_texture *screen_texture)
 	if (game->screen_buffer[y][x] > 0)
 		set_image_pixel(screen_texture, x, y, game->screen_buffer[y][x]);
 	else if (y < game->screen_height / 2)
-		set_image_pixel(screen_texture, x, y, 0x808080); // Plafond
+		set_image_pixel(screen_texture, x, y, 0x808080);
 	else if (y < game->screen_height - 1)
-		set_image_pixel(screen_texture, x, y, 0x141414); // Sol
+		set_image_pixel(screen_texture, x, y, 0x141414);
 }
 
 static int	key_press_handler(int key, void *param)

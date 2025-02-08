@@ -6,19 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:08:37 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/07 12:35:52 by mazeghou         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_last.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 12:06:32 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/07 12:06:32 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/08 11:56:58 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +97,12 @@ int	is_map_last(char *map_path, char **map)
 		result = 1;
 	if (line)
 		free(line);
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
 		free(line);
+		line = get_next_line(fd);
+	}
 	gnl_cleanup(fd);
-	close(fd);
-	return (result);
+	return (close(fd), result);
 }
