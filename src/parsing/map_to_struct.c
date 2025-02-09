@@ -65,15 +65,15 @@ void	set_map_info(t_map_info *map_info, char **map, int max_width)
 	map_info->map = map;
 	map_info->map_width = max_width;
 	map_info->map_height = ft_array_len(map);
-	map_info->player_x = player_coords[0];
-	map_info->player_y = player_coords[1];
+	map_info->player_x = player_coords[1];
+	map_info->player_y = player_coords[0];
 	free(player_coords);
 }
 
 void	set_player_position(t_map_info *map_info, int *player_coords)
 {
-	map_info->player_x = player_coords[0];
-	map_info->player_y = player_coords[1];
+	map_info->player_x = player_coords[1];
+	map_info->player_y = player_coords[0];
 	free(player_coords);
 }
 
