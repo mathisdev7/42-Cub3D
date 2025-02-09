@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:21 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/08 12:03:47 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/09 11:20:31 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 	t_map_info	map_info;
 	t_game		*game;
 
+	ft_memset(map_info.tab_assets, 0, 256);
 	if (check_args(argc, argv))
 		return (printf("error args\n"), 0);
 	if (is_file_empty(argv[1]))
@@ -95,6 +96,10 @@ int	main(int argc, char **argv)
 	if (!check_color(map_info.floor_color)
 		|| !check_color(map_info.ceiling_color))
 		return (free_all(map, &map_info), printf("error color\n"), 0);
+	map_info.tab_assets[0] = map_info.no_path;
+	map_info.tab_assets[1] = map_info.so_path;
+	map_info.tab_assets[2] = map_info.we_path;
+	map_info.tab_assets[3] = map_info.ea_path;
 	game = NULL;
 	game = init_game(map_info);
 	render_game(game);
