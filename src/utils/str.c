@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:45:39 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/05 14:45:24 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/09 14:12:06 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,33 @@ char	*ft_strstr(char *str, char *to_find)
 		i++;
 	}
 	return (0);
+}
+
+int	check_color(char *color)
+{
+	int		i;
+	int		j;
+	char	**colors;
+
+	i = 0;
+	colors = ft_split(color, ',');
+	if (!colors)
+		return (0);
+	if (ft_array_len(colors) != 3)
+		return (ft_free_array(colors), 0);
+	while (colors[i])
+	{
+		j = 0;
+		while (colors[i][j])
+		{
+			if (colors[i][j] < '0' || colors[i][j] > '9')
+				return (ft_free_array(colors), 0);
+			j++;
+		}
+		i++;
+	}
+	ft_free_array(colors);
+	return (1);
 }
 
 char	*ft_strpad(char *str, int len, char pad)

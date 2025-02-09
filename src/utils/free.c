@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 23:53:15 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/07 19:45:46 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/09 14:15:40 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ void	free_int_array(int **array, int size)
 		i++;
 	}
 	free(array);
+}
+
+void	free_all(char **map, t_map_info *map_info)
+{
+	free_map(map);
+	free(map_info->no_path);
+	free(map_info->so_path);
+	free(map_info->we_path);
+	free(map_info->ea_path);
+	free(map_info->floor_color);
+	free(map_info->ceiling_color);
 }
 
 void	free_map(char **map)

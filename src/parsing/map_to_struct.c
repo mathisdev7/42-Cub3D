@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:28:40 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/09 10:47:01 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/09 14:11:32 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,26 @@ void	set_map_info(t_map_info *map_info, char **map, int max_width)
 	map_info->map = map;
 	map_info->map_width = max_width;
 	map_info->map_height = ft_array_len(map);
-	map_info->player_x = player_coords[1];
-	map_info->player_y = player_coords[0];
 	free(player_coords);
 }
 
-void	set_player_position(t_map_info *map_info, int *player_coords)
+void	set_player_position_and_assets(t_map_info *map_info, int *player_coords,
+		int player_coords_exist)
 {
-	map_info->player_x = player_coords[1];
-	map_info->player_y = player_coords[0];
+	if (player_coords_exist)
+	{
+		map_info->player_x = player_coords[1];
+		map_info->player_y = player_coords[0];
+	}
+	else
+	{
+		map_info->player_x = -1;
+		map_info->player_y = -1;
+	}
+	map_info->tab_assets[0] = map_info->no_path;
+	map_info->tab_assets[1] = map_info->so_path;
+	map_info->tab_assets[2] = map_info->we_path;
+	map_info->tab_assets[3] = map_info->ea_path;
 	free(player_coords);
 }
 
@@ -94,11 +105,8 @@ t_map_info	map_to_struct(char **map, char *map_path)
 	parse_assets(map_path, &map_info);
 	parse_color(map_path, &map_info);
 	if (player_coords)
-		set_player_position(&map_info, player_coords);
+		set_player_position_and_assets(&map_info, player_coords, 1);
 	else
-	{
-		map_info.player_x = -1;
-		map_info.player_y = -1;
-	}
+		set_player_position_and_assets(&map_info, player_coords, 0);
 	return (map_info);
 }

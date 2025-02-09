@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/09 11:39:38 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/09 14:16:47 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,15 @@ char		**check_map(char *map_path);
 int			check_file(char *arg);
 char		*remove_spaces(char *line);
 void		ft_free_array(char **array);
+int			check_color(char *color);
+int			is_file_empty(char *map_path);
+int			check_initial_conditions(int argc, char **argv);
+int			check_map_validity(char **map, char *map_path);
+int			check_assets_validity(t_map_info *map_info);
+int			check_map_and_colors(char **map, t_map_info *map_info,
+				char *map_path);
 int			check_map_content(char **map, t_map_info *map_info, char *map_path);
+void		free_all(char **map, t_map_info *map_info);
 char		**parse_map(char *map_path);
 size_t		get_map_size(char *map_path);
 char		**allocate_map_array(char *map_path);
