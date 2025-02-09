@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 04:33:25 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/09 00:43:27 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:25:03 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	init_screen_buffer(t_game *game)
 
 int	init_textures(t_game *game)
 {
-	char	*texture_paths[4] = {"./assets/eagle.xpm", "./assets/eagle.xpm",
-			"./assets/eagle.xpm", "./assets/eagle.xpm"};
+	char	*texture_paths[4] = {"./assets/eagle.xpm", "./assets/purplestone.xpm",
+			"./assets/red.xpm", "./assets/greystone.xpm"};
 	int		i;
 	int		width;
 	int		height;
@@ -86,20 +86,21 @@ t_game	*init_game(t_map_info map_info)
 	game = malloc(sizeof(t_game));
 	game->screen_buffer = NULL;
 	game->map_info = map_info;
-	game->screen_height = 600;
-	game->screen_width = 800;
+	game->screen_height = 480;
+	game->screen_width = 640;
 	game->tex_size = 64;
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->screen_width,
 			game->screen_height, "Cub3d");
-	game->player_pos_x = 7 + 0.5;
-	game->player_pos_y = 3 + 0.5;
+	game->player_pos_x = 2 + 0.5;
+	game->player_pos_y = 1 + 0.5;
 	game->player_dir_x = 0;
 	game->player_dir_y = -1;
 	game->plane_x = 0.66;
 	game->plane_y = 0;
 	game->player_move_x = 0;
 	game->player_move_y = 0;
+	game->player_rotate = 0;
 	init_textures(game);
 	init_screen_buffer(game);
 	return (game);

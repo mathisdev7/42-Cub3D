@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:53:00 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/09 00:43:14 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/09 01:58:17 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ static int	key_press_handler(int key, void *param)
 		game->player_move_y = -1;
 	if (key == XK_d)
 		game->player_move_x = 1;
+	if (key == XK_Right)
+		game->player_rotate = 1;
+	if (key == XK_Left)
+		game->player_rotate = -1;
 	return (0);
 }
 
@@ -59,6 +63,10 @@ static int	key_release_handler(int key, void *param)
 		game->player_move_x += 1;
 	if (key == XK_d && game->player_move_x == 1)
 		game->player_move_x -= 1;
+	if (key == XK_Right && game->player_rotate == 1)
+		game->player_rotate = 0;
+	if (key == XK_Left && game->player_rotate == -1)
+		game->player_rotate = 0;
 	return (0);
 }
 
@@ -84,6 +92,27 @@ void	move_left(t_game *game)
 {
 	game->player_pos_x += game->player_dir_y * MOVESPEED;
 	game->player_pos_y -= game->player_dir_x * MOVESPEED;
+}
+
+void rotate_right(t_game *game)
+{
+    double old_dir_x = game->player_dir_x;
+    game->player_dir_x = game->player_dir_x * cos(ROTSPEED) - game->player_dir_y * sin(ROTSPEED);
+    game->player_dir_y = old_dir_x * sin(ROTSPEED) + game->player_dir_y * cos(ROTSPEED);
+
+    double old_plane_x = game->plane_x;
+    game->plane_x = game->plane_x * cos(ROTSPEED) - game->plane_y * sin(ROTSPEED);
+    game->plane_y = old_plane_x * sin(ROTSPEED) + game->plane_y * cos(ROTSPEED);
+}
+
+void	rotate_left(t_game *game)
+{
+	double	old_dir_x = game->player_dir_x;
+	game->player_dir_x = game->player_dir_x * cos(-ROTSPEED) - game->player_dir_y * sin(-ROTSPEED);
+	game->player_dir_y = old_dir_x * sin(-ROTSPEED) + game->player_dir_y * cos(-ROTSPEED);
+	double	old_plane_x = game->plane_x;
+	game->plane_x = game->plane_x * cos(-ROTSPEED) - game->plane_y * sin(-ROTSPEED);
+	game->plane_y = old_plane_x * sin(-ROTSPEED) + game->plane_y * cos(-ROTSPEED);
 }
 
 void	fill_screen(t_game *game)
@@ -123,6 +152,10 @@ void	move_player(t_game *game)
 		move_right(game);
 	if (game->player_move_x == -1)
 		move_left(game);
+	if (game->player_rotate == 1)
+		rotate_right(game);
+	if (game->player_rotate == -1)
+		rotate_left(game);
 }
 
 void	clear_screen_buffer(t_game *game)

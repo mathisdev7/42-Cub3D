@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:26:01 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/07 19:43:03 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/09 01:44:00 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_game
 	double		plane_y;
 	int			player_move_x;
 	int			player_move_y;
+	int			player_rotate;
 	t_map_info	map_info;
 	t_raycast	raycast;
 }				t_game;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/07 19:45:50 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:19:43 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # include <unistd.h>
 
 # define MOVESPEED 0.05
+# define ROTSPEED 0.05
+
+# define NORTH 0
+# define SOUTH 1
+# define WEST 2
+# define EAST 3
 
 int			check_args(int argc, char **argv);
 char		**check_map(char *map_path);

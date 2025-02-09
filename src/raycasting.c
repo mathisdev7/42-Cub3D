@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 22:01:23 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/09 00:43:57 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/09 02:19:39 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	calc_line_height(t_raycast *raycast, t_game *game)
 	raycast->wall_x -= floor(raycast->wall_x);
 }
 
-void	store_wall_pixels(t_game *game, int x, t_raycast *raycast)
+void	store_wall_pixels(t_game *game, int x, t_raycast *raycast, int tex_num)
 {
 	int			y;
 	t_texture	*tex;
@@ -109,7 +109,7 @@ void	store_wall_pixels(t_game *game, int x, t_raycast *raycast)
 	int			tex_y;
 	int			color;
 
-	tex = &game->textures[raycast->side];
+	tex = &game->textures[tex_num];
 	step = 1.0 * tex->height / raycast->line_height;
 	tex_pos = (raycast->draw_start_y - game->screen_height / 2
 			+ raycast->line_height / 2) * step;
@@ -136,19 +136,28 @@ void	raycasting(t_raycast *raycast, t_game *game)
 	int	tex_num;
 
 	x = 0;
-	tex_num = 0;
 	while (x < game->screen_width)
 	{
 		set_curr_line_values(raycast, x, game);
 		init_step_and_side_dist(raycast, game);
 		dda_algorithm(raycast, game);
 		calc_line_height(raycast, game);
+		if (raycast->side == 0)
+		{
+			if (raycast->ray_dir_x > 0)
+				tex_num = EAST;
+			else
+				tex_num = WEST;
+		}
+		else
+		{
+			if (raycast->ray_dir_y > 0)
+				tex_num = SOUTH;
+			else
+				tex_num = NORTH;
+		}
 		raycast->tex_x = (int)(raycast->wall_x * game->textures[tex_num].width);
-		if (raycast->side == 0 && raycast->ray_dir_x > 0)
-			raycast->tex_x = game->textures[tex_num].width - raycast->tex_x - 1;
-		if (raycast->side == 1 && raycast->ray_dir_y < 0)
-			raycast->tex_x = game->textures[tex_num].width - raycast->tex_x - 1;
-		store_wall_pixels(game, x, raycast);
+		store_wall_pixels(game, x, raycast, tex_num);
 		x++;
 	}
 }
