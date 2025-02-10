@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 04:33:25 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/10 05:33:40 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/10 09:48:06 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,9 @@ void	init_screen_buffer(t_game *game)
 
 int	init_textures(t_game *game)
 {
-	char	*texture_paths[4] = {game->map_info.tab_assets[0],
-			game->map_info.tab_assets[1], game->map_info.tab_assets[2],
-			game->map_info.tab_assets[3]};
-	int		i;
-	int		width;
-	int		height;
+	int	i;
+	int	width;
+	int	height;
 
 	width = game->tex_size;
 	height = game->tex_size;
@@ -65,7 +62,7 @@ int	init_textures(t_game *game)
 	while (i < 4)
 	{
 		game->textures[i].img = mlx_xpm_file_to_image(game->mlx,
-				texture_paths[i], &width, &height);
+				game->map_info.tab_assets[i], &width, &height);
 		if (!game->textures[i].img)
 			return (0);
 		game->textures[i].addr = (int *)mlx_get_data_addr(game->textures[i].img,
