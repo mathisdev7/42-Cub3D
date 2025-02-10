@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/09 14:16:47 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:11:15 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 
 # define MOVESPEED 0.05
 # define ROTSPEED 0.05
+
+# define SHOOT_DISTANCE 5
+# define SHOOT_PRECISION 0.3
 
 # define NORTH 0
 # define SOUTH 1
@@ -82,5 +85,10 @@ void		raycasting(t_raycast *raycast, t_game *game);
 void		init_raycast(t_raycast *raycast);
 void		init_screen_buffer(t_game *game);
 void		*ft_calloc(size_t count, size_t size);
+void		render_sprites(t_game *game, double *z_buffer);
+void		init_sprite(t_game *game, char *filename);
+void		init_pistol(t_game *game, char *filename);
+void		draw_pistol(t_game *game);
+void		shoot_weapon(t_game *game);
 
 #endif

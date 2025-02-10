@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:53:00 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/10 06:28:58 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:14:59 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static int	key_press_handler(int key, void *param)
 		game->player_rotate = 1;
 	if (key == XK_Left)
 		game->player_rotate = -1;
+	if (key == XK_Control_L)
+		shoot_weapon(game);
 	return (0);
 }
 
@@ -67,6 +69,8 @@ static int	key_release_handler(int key, void *param)
 		game->player_rotate = 0;
 	if (key == XK_Left && game->player_rotate == -1)
 		game->player_rotate = 0;
+	if (key == XK_Control_L)
+		init_pistol(game, "./assets/base/gun_idle.xpm");
 	return (0);
 }
 
@@ -234,6 +238,7 @@ int	update(void *param) // function called every frame
 	clear_screen_buffer(game);
 	init_raycast(&game->raycast);
 	raycasting(&game->raycast, game);
+	draw_pistol(game);
 	fill_screen(game);
 	return (0);
 }

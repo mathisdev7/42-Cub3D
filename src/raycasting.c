@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 22:01:23 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/09 02:19:39 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:56:01 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,8 @@ void	set_curr_line_values(t_raycast *raycast, int x, t_game *game)
 	raycast->ray_dir_y = game->player_dir_y + game->plane_y * raycast->camera_x;
 	raycast->map_x = (int)game->player_pos_x;
 	raycast->map_y = (int)game->player_pos_y;
-	raycast->delta_dist_x = (raycast->ray_dir_x == 0) ? 1e30 : fabs(1
-			/ raycast->ray_dir_x);
-	raycast->delta_dist_y = (raycast->ray_dir_y == 0) ? 1e30 : fabs(1
-			/ raycast->ray_dir_y);
+	raycast->delta_dist_x = fabs(1 / raycast->ray_dir_x);
+	raycast->delta_dist_y = fabs(1 / raycast->ray_dir_y);
 }
 
 void	calc_line_height(t_raycast *raycast, t_game *game)
@@ -134,6 +132,7 @@ void	raycasting(t_raycast *raycast, t_game *game)
 {
 	int	x;
 	int	tex_num;
+	double	z_buffer[640];
 
 	x = 0;
 	while (x < game->screen_width)
@@ -158,6 +157,8 @@ void	raycasting(t_raycast *raycast, t_game *game)
 		}
 		raycast->tex_x = (int)(raycast->wall_x * game->textures[tex_num].width);
 		store_wall_pixels(game, x, raycast, tex_num);
+		z_buffer[x] = raycast->wall_dist;
 		x++;
 	}
+	render_sprites(game, z_buffer);
 }

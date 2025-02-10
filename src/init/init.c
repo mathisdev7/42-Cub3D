@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 04:33:25 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/10 05:33:40 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:10:58 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,51 @@ int	init_textures(t_game *game)
 	return (1);
 }
 
+void draw_pistol(t_game *game)
+{
+    int img_width = 64;
+    int img_height = 64;
+    int target_width = 384;
+    int target_height = 384;
+    int start_x = (game->screen_width - target_width) / 2;
+    int start_y = game->screen_height - target_height;
+    double scale_x = (double)target_width / img_width;
+    double scale_y = (double)target_height / img_height;
+
+    for (int y = 0; y < target_height; y++) 
+    {
+        for (int x = 0; x < target_width; x++) 
+        {
+            // Calcul des coordonnées source
+            int src_x = (int)(x / scale_x);
+            int src_y = (int)(y / scale_y);
+
+            if (src_x >= 0 && src_x < img_width && src_y >= 0 && src_y < img_height) 
+            {
+                int color = game->pistol.addr[src_y * img_width + src_x];
+                
+                // Vérification des bornes écran
+                int draw_x = start_x + x;
+                int draw_y = start_y + y;
+				if ((color & 0x00FFFFFF) != 0)
+				{
+					if (draw_x >= 0 && draw_x < game->screen_width && draw_y >= 0 && draw_y < game->screen_height) 
+					{
+						game->screen_buffer[draw_y][draw_x] = color;
+					}
+				}
+            }
+        }
+    }
+}
+
+
+void	init_pistol(t_game *game, char *filename)
+{	
+	game->pistol.img = mlx_xpm_file_to_image(game->mlx, filename, &game->pistol.width, &game->pistol.height);
+	game->pistol.addr = (int *)mlx_get_data_addr(game->pistol.img, &game->pistol.bits_per_pixel, &game->pistol.size_line, &game->pistol.endian);
+}
+
 t_game	*init_game(t_map_info map_info)
 {
 	t_game	*game;
@@ -102,6 +147,8 @@ t_game	*init_game(t_map_info map_info)
 	game->player_move_x = 0;
 	game->player_move_y = 0;
 	game->player_rotate = 0;
+	init_pistol(game, "./assets/base/gun_idle.xpm");
+	init_sprite(game, "./assets/base/guard.xpm");
 	init_textures(game);
 	init_screen_buffer(game);
 	return (game);

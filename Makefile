@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+         #
+#    By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 20:34:26 by mazeghou          #+#    #+#              #
-#    Updated: 2025/02/09 14:16:56 by mazeghou         ###   ########.fr        #
+#    Updated: 2025/02/10 11:41:54 by nopareti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC         = main.c parsing/map.c parsing/args.c parsing/cardinals.c \
 				parsing/map_validation.c utils/array_utils.c \
 				parsing/set.c parsing/colors.c parsing/map_validation2.c \
 				parsing/player.c parsing/map_last.c init/init.c \
-				raycasting.c render.c utils/file.c utils/check.c
+				raycasting.c render.c utils/file.c utils/check.c sprites.c \
+				player.c
 
 SRCS        = $(addprefix $(SRC_PATH), $(SRC))
 

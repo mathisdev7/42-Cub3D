@@ -6,18 +6,12 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:26:01 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/10 05:38:29 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:11:57 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-
-typedef struct s_tuple
-{
-	double		x;
-	double		y;
-}				t_tuple;
 
 typedef struct s_map_info
 {
@@ -88,6 +82,13 @@ typedef struct s_texture
 	int			height;
 }				t_texture;
 
+typedef struct	s_sprite
+{
+  double x;
+  double y;
+  t_texture	texture;
+}				t_sprite;
+
 typedef struct s_raycast
 {
 	double		camera_x;
@@ -119,6 +120,8 @@ typedef struct s_game
 	int			screen_width;
 	int			tex_size;
 	t_texture	textures[4];
+	t_sprite	sprite;
+	t_texture	pistol;
 	int			**screen_buffer;
 	double		player_pos_x;
 	double		player_pos_y;
