@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 04:33:25 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/09 11:20:50 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/10 05:33:40 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ t_game	*init_game(t_map_info map_info)
 	game = malloc(sizeof(t_game));
 	game->screen_buffer = NULL;
 	game->map_info = map_info;
-	game->screen_height = 600;
-	game->screen_width = 800;
+	game->screen_height = 480;
+	game->screen_width = 640;
 	game->tex_size = 512;
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->screen_width,

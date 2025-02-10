@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:53:00 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/09 01:58:17 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/10 06:28:58 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,47 +70,85 @@ static int	key_release_handler(int key, void *param)
 	return (0);
 }
 
-void	move_forward(t_game *game)
+void move_forward(t_game *game)
 {
-	game->player_pos_x += game->player_dir_x * MOVESPEED;
-	game->player_pos_y += game->player_dir_y * MOVESPEED;
+	double	new_x;
+	double	new_y;
+	
+    new_x = game->player_pos_x + game->player_dir_x * MOVESPEED;
+    new_y = game->player_pos_y + game->player_dir_y * MOVESPEED;
+
+    if (game->map_info.map[(int)game->player_pos_y][(int)new_x] != '1')
+        game->player_pos_x = new_x;
+    if (game->map_info.map[(int)new_y][(int)game->player_pos_x] != '1')
+        game->player_pos_y = new_y;
 }
+
 
 void	move_backward(t_game *game)
 {
-	game->player_pos_x -= game->player_dir_x * MOVESPEED;
-	game->player_pos_y -= game->player_dir_y * MOVESPEED;
+	double	new_x;
+	double	new_y;
+
+	new_x = game->player_pos_x - game->player_dir_x * MOVESPEED;
+    new_y = game->player_pos_y - game->player_dir_y * MOVESPEED;
+
+	if (game->map_info.map[(int)game->player_pos_y][(int)new_x] != '1')
+        game->player_pos_x = new_x;
+    if (game->map_info.map[(int)new_y][(int)game->player_pos_x] != '1')
+        game->player_pos_y = new_y;
 }
 
 void	move_right(t_game *game)
 {
-	game->player_pos_x -= game->player_dir_y * MOVESPEED;
-	game->player_pos_y += game->player_dir_x * MOVESPEED;
+	double	new_x;
+	double	new_y;
+
+	new_x = game->player_pos_x - game->player_dir_y * MOVESPEED;
+    new_y = game->player_pos_y + game->player_dir_x * MOVESPEED;
+
+	if (game->map_info.map[(int)game->player_pos_y][(int)new_x] != '1')
+        game->player_pos_x = new_x;
+    if (game->map_info.map[(int)new_y][(int)game->player_pos_x] != '1')
+        game->player_pos_y = new_y;
 }
 
 void	move_left(t_game *game)
 {
-	game->player_pos_x += game->player_dir_y * MOVESPEED;
-	game->player_pos_y -= game->player_dir_x * MOVESPEED;
+	double	new_x;
+	double	new_y;
+
+	new_x = game->player_pos_x + game->player_dir_y * MOVESPEED;
+    new_y = game->player_pos_y - game->player_dir_x * MOVESPEED;
+	if (game->map_info.map[(int)game->player_pos_y][(int)new_x] != '1')
+        game->player_pos_x = new_x;
+    if (game->map_info.map[(int)new_y][(int)game->player_pos_x] != '1')
+        game->player_pos_y = new_y;
 }
 
 void rotate_right(t_game *game)
 {
-    double old_dir_x = game->player_dir_x;
+	double	old_dir_x;
+	double	old_plane_x;
+
+    old_dir_x = game->player_dir_x;
     game->player_dir_x = game->player_dir_x * cos(ROTSPEED) - game->player_dir_y * sin(ROTSPEED);
     game->player_dir_y = old_dir_x * sin(ROTSPEED) + game->player_dir_y * cos(ROTSPEED);
 
-    double old_plane_x = game->plane_x;
+    old_plane_x = game->plane_x;
     game->plane_x = game->plane_x * cos(ROTSPEED) - game->plane_y * sin(ROTSPEED);
     game->plane_y = old_plane_x * sin(ROTSPEED) + game->plane_y * cos(ROTSPEED);
 }
 
 void	rotate_left(t_game *game)
 {
-	double	old_dir_x = game->player_dir_x;
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = game->player_dir_x;
 	game->player_dir_x = game->player_dir_x * cos(-ROTSPEED) - game->player_dir_y * sin(-ROTSPEED);
 	game->player_dir_y = old_dir_x * sin(-ROTSPEED) + game->player_dir_y * cos(-ROTSPEED);
-	double	old_plane_x = game->plane_x;
+	old_plane_x = game->plane_x;
 	game->plane_x = game->plane_x * cos(-ROTSPEED) - game->plane_y * sin(-ROTSPEED);
 	game->plane_y = old_plane_x * sin(-ROTSPEED) + game->plane_y * cos(-ROTSPEED);
 }
@@ -140,6 +178,19 @@ void	fill_screen(t_game *game)
 	}
 	mlx_put_image_to_window(game->mlx, game->win, screen_texture.img, 0, 0);
 	mlx_destroy_image(game->mlx, screen_texture.img);
+}
+
+int	check_collision(t_game *game, char movement_type)
+{
+	if (movement_type == 'F')
+	{
+		if (game->map_info.map[(int)game->player_pos_y][(int)game->player_pos_x] == '1')
+		{
+			return (1);
+		}
+		return (0);
+	}
+	return (0);
 }
 
 void	move_player(t_game *game)

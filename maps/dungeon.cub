@@ -1,10 +1,10 @@
 F 76,76,76
 C 99,99,99
 
-NO ./assets/eagle.xpm
-SO ./assets/greystone.xpm
-WE ./assets/purplestone.xpm
-EA ./assets/red.xpm
+NO ./assets/base/eagle.xpm
+SO ./assets/base/greystone.xpm
+WE ./assets/base/purplestone.xpm
+EA ./assets/base/red.xpm
 
 1111111111111111111
 10N1001001001000001
