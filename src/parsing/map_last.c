@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:08:37 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/08 11:56:58 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:14:05 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	skip_to_map_start(int fd, char **line, char **map)
 
 int	check_if_map_last(int fd, char **line, char **map, size_t i)
 {
-	if (i == get_map_size_2(map))
+	if (i == ft_array_len(map))
 	{
 		free(*line);
 		*line = get_next_line(fd);

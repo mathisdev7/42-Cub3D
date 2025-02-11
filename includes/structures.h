@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:26:01 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/10 11:11:57 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:48:55 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct s_map_info
 	double		player_dir_y;
 	double		player_plane_x;
 	double		player_plane_y;
+	double		*ennemy_sprites;
+	double		*other_sprites;
 	char		*no_path;
 	char		*so_path;
 	char		*we_path;
@@ -82,11 +84,11 @@ typedef struct s_texture
 	int			height;
 }				t_texture;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
-  double x;
-  double y;
-  t_texture	texture;
+	double		x;
+	double		y;
+	t_texture	texture;
 }				t_sprite;
 
 typedef struct s_raycast

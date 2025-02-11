@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 10:48:54 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/07 12:14:09 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:50:31 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_map_elements(char **map)
 		{
 			if (map[i][j] == '0' || map[i][j] == '1' || map[i][j] == 'N'
 				|| map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W'
-				|| map[i][j] == ' ')
+				|| map[i][j] == ' ' || map[i][j] == '2' || map[i][j] == '3')
 				j++;
 			else
 				return (1);
