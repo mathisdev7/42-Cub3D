@@ -6,30 +6,11 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 06:56:31 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/10 15:39:49 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:19:55 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void    init_sprite(t_game *game, char *filename)
-{
-    t_texture   texture;
-    int height, width;
-    int size_line;
-    int bpp;
-    int endian;
-
-    texture.img = mlx_xpm_file_to_image(game->mlx, filename,
-        &width, &height);
-    texture.addr = (int *)mlx_get_data_addr(texture.img, &bpp,
-        &size_line, &endian);
-    texture.height = height;
-    texture.width = width;
-    game->sprite.x = 7.5;
-    game->sprite.y = 2.5;
-    game->sprite.texture = texture;
-}
 
 void render_sprites(t_game *game, double *z_buffer)
 {
@@ -45,20 +26,20 @@ void render_sprites(t_game *game, double *z_buffer)
 
     /*for (int i = 0; i < num_sprite; i++)
     {
-        spriteDistance[i] = ((game->player_pos_x - sprite[i].x) * 
-            (game->player_pos_x - sprite[i].x) +
-            (game->player_pos_y - sprite[i].y) * (game->player_pos_y - sprite[i].y));
+        spriteDistance[i] = ((game->player.pos_x - sprite[i].x) * 
+            (game->player.pos_x - sprite[i].x) +
+            (game->player.pos_y - sprite[i].y) * (game->player.pos_y - sprite[i].y));
     }*/
 
     for (int i = 0; i < num_sprite; i++)
     {
-        double sprite_x = sprite[i].x - game->player_pos_x;
-        double sprite_y = sprite[i].y - game->player_pos_y;
+        double sprite_x = sprite[i].x - game->player.pos_x;
+        double sprite_y = sprite[i].y - game->player.pos_y;
 
-        double invDet = 1.0 / (game->plane_x * game->player_dir_y - game->player_dir_x * game->plane_y); 
+        double invDet = 1.0 / (game->player.plane_x * game->player.dir_y - game->player.dir_x * game->player.plane_y); 
 
-        double transformX = invDet * (game->player_dir_y * sprite_x - game->player_dir_x * sprite_y);
-        double transformY = invDet * (-game->plane_y * sprite_x + game->plane_x * sprite_y); 
+        double transformX = invDet * (game->player.dir_y * sprite_x - game->player.dir_x * sprite_y);
+        double transformY = invDet * (-game->player.plane_y * sprite_x + game->player.plane_x * sprite_y); 
 
         int spriteScreenX = (int)(game->screen_width / 2) * (1 + transformX / transformY);
 

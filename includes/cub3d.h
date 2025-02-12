@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/10 16:11:15 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:55:14 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 
 # define SHOOT_DISTANCE 5
 # define SHOOT_PRECISION 0.3
+
+# define GUN_IDLE_PATH "./assets/base/gun_idle.xpm"
+# define GUN_FIRE_PATH "./assets/base/gun_fire.xpm"
+# define FIRE_SOUND_PATH "./assets/base/33.wav"
 
 # define NORTH 0
 # define SOUTH 1
@@ -87,8 +91,17 @@ void		init_screen_buffer(t_game *game);
 void		*ft_calloc(size_t count, size_t size);
 void		render_sprites(t_game *game, double *z_buffer);
 void		init_sprite(t_game *game, char *filename);
-void		init_pistol(t_game *game, char *filename);
-void		draw_pistol(t_game *game);
+t_texture	init_xpm_texture(t_game *game, char *filename);
 void		shoot_weapon(t_game *game);
+void		play_sound(const char *path);
+t_player    init_player(t_game *game);
+void		draw_texture_on_screen(t_game *game, t_texture tex, int scale, int draw_x, int draw_y);
+void 		move_forward(t_player *player, char **map);
+void    	move_backward(t_player *player, char **map);
+void    	move_right(t_player *player, char **map);
+void    	move_left(t_player *player, char **map);
+void 		rotate_right(t_player *player);
+void 		rotate_left(t_player *player);
+void		move_player(t_game *game);
 
 #endif

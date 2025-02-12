@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 22:01:23 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/10 14:56:01 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:05:43 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,25 @@ void	init_step_and_side_dist(t_raycast *raycast, t_game *game)
 	if (raycast->ray_dir_x < 0)
 	{
 		raycast->step_x = -1;
-		raycast->side_dist_x = (game->player_pos_x - raycast->map_x)
+		raycast->side_dist_x = (game->player.pos_x - raycast->map_x)
 			* raycast->delta_dist_x;
 	}
 	else
 	{
 		raycast->step_x = 1;
-		raycast->side_dist_x = (raycast->map_x + 1.0 - game->player_pos_x)
+		raycast->side_dist_x = (raycast->map_x + 1.0 - game->player.pos_x)
 			* raycast->delta_dist_x;
 	}
 	if (raycast->ray_dir_y < 0)
 	{
 		raycast->step_y = -1;
-		raycast->side_dist_y = (game->player_pos_y - raycast->map_y)
+		raycast->side_dist_y = (game->player.pos_y - raycast->map_y)
 			* raycast->delta_dist_y;
 	}
 	else
 	{
 		raycast->step_y = 1;
-		raycast->side_dist_y = (raycast->map_y + 1.0 - game->player_pos_y)
+		raycast->side_dist_y = (raycast->map_y + 1.0 - game->player.pos_y)
 			* raycast->delta_dist_y;
 	}
 }
@@ -72,10 +72,10 @@ void	set_curr_line_values(t_raycast *raycast, int x, t_game *game)
 	raycast->step_x = 0;
 	raycast->step_y = 0;
 	raycast->camera_x = 2 * x / (double)game->screen_width - 1;
-	raycast->ray_dir_x = game->player_dir_x + game->plane_x * raycast->camera_x;
-	raycast->ray_dir_y = game->player_dir_y + game->plane_y * raycast->camera_x;
-	raycast->map_x = (int)game->player_pos_x;
-	raycast->map_y = (int)game->player_pos_y;
+	raycast->ray_dir_x = game->player.dir_x + game->player.plane_x * raycast->camera_x;
+	raycast->ray_dir_y = game->player.dir_y + game->player.plane_y * raycast->camera_x;
+	raycast->map_x = (int)game->player.pos_x;
+	raycast->map_y = (int)game->player.pos_y;
 	raycast->delta_dist_x = fabs(1 / raycast->ray_dir_x);
 	raycast->delta_dist_y = fabs(1 / raycast->ray_dir_y);
 }
@@ -90,10 +90,10 @@ void	calc_line_height(t_raycast *raycast, t_game *game)
 	if (raycast->draw_end_y >= game->screen_height)
 		raycast->draw_end_y = game->screen_height - 1;
 	if (raycast->side == 0)
-		raycast->wall_x = game->player_pos_y + raycast->wall_dist
+		raycast->wall_x = game->player.pos_y + raycast->wall_dist
 			* raycast->ray_dir_y;
 	else
-		raycast->wall_x = game->player_pos_x + raycast->wall_dist
+		raycast->wall_x = game->player.pos_x + raycast->wall_dist
 			* raycast->ray_dir_x;
 	raycast->wall_x -= floor(raycast->wall_x);
 }
