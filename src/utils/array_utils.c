@@ -6,13 +6,13 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:42:19 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/03 14:16:46 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:14:21 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-size_t	get_map_size_2(char **map)
+size_t	ft_array_len(char **map)
 {
 	size_t	i;
 

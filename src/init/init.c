@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 04:33:25 by nopareti          #+#    #+#             */
 /*   Updated: 2025/02/12 09:36:51 by nopareti         ###   ########.fr       */
@@ -95,7 +95,7 @@ t_game	*init_game(t_map_info map_info)
 			game->screen_height, "Cub3d");
 	game->player = init_player(game);
 	game->sprite.x = 7.5;
-    game->sprite.y = 2.5;
+  game->sprite.y = 2.5;
 	game->sprite.texture = init_xpm_texture(game, "./assets/base/guard.xpm");
 	init_textures(game);
 	init_screen_buffer(game);

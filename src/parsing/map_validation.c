@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 05:01:55 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/06 21:19:43 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:14:06 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	count_border_chars(char **map, t_rectangle_data *data)
 		{
 			if (data->i == 0)
 				data->top++;
-			else if (data->i == get_map_size_2(map) - 1)
+			else if (data->i == ft_array_len(map) - 1)
 				data->bottom++;
 			data->j++;
 		}
