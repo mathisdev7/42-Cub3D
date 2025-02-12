@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:21 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/11 19:57:50 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:22:09 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ int	main(int argc, char **argv)
 	if (check_map_and_colors(map, &map_info, argv[1]))
 		return (free_all(map, &map_info), 0);
 	game = NULL;
-	printf("map_info.ennemy_sprites[0] = %f\n", map_info.ennemy_sprites[0]);
-	printf("map_info.ennemy_sprites[1] = %f\n", map_info.ennemy_sprites[1]);
-	printf("map_info.other_sprites[0] = %f\n", map_info.other_sprites[0]);
-	printf("map_info.other_sprites[1] = %f\n", map_info.other_sprites[1]);
+	printf("map_info.enemy_pos[0].pos_x = %f\n", map_info.enemy_pos[0].pos_x);
+	printf("map_info.enemy_pos[0].pos_y = %f\n", map_info.enemy_pos[0].pos_y);
+	printf("map_info.enemy_pos[1].pos_x = %f\n", map_info.enemy_pos[1].pos_x);
+	printf("map_info.enemy_pos[1].pos_y = %f\n", map_info.enemy_pos[1].pos_y);
+	printf("map_info.enemy_pos[0].pos_x = %f\n", map_info.enemy_pos[2].pos_x);
+	printf("map_info.enemy_pos[0].pos_y = %f\n", map_info.enemy_pos[2].pos_y);
 	init_game_info(game, &map_info, map);
 	return (0);
 }

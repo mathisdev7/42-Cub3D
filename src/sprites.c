@@ -6,14 +6,14 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 06:56:31 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/11 15:19:55 by nopareti         ###   ########.fr       */
-/*   Updated: 2025/02/11 20:00:51 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:24:35 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../includes/cub3d.h"
 
-void render_sprites(t_game *game, double *z_buffer)
+void	render_sprites(t_game *game, double *z_buffer)
 {
 	int			num_sprite;
 	t_sprite	sprite[1];
@@ -33,7 +33,7 @@ void render_sprites(t_game *game, double *z_buffer)
 	int			d;
 	int			texY;
 	int			color;
-  
+
 	num_sprite = 1;
 	sprite[0].x = game->sprite.x;
 	sprite[0].y = game->sprite.y;

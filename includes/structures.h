@@ -6,12 +6,18 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:26:01 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/11 15:03:38 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:19:48 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+typedef struct s_enemy_pos
+{
+	double		pos_x;
+	double		pos_y;
+}				t_enemy_pos;
 
 typedef struct s_map_info
 {
@@ -27,12 +33,14 @@ typedef struct s_map_info
 	double		player_plane_y;
 	double		*ennemy_sprites;
 	double		*other_sprites;
+	t_enemy_pos	*enemy_pos;
 	char		*no_path;
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
 	char		*floor_color;
 	char		*ceiling_color;
+
 	char		*tab_assets[256];
 }				t_map_info;
 
@@ -91,7 +99,7 @@ typedef struct s_sprite
 	t_texture	texture;
 }				t_sprite;
 
-typedef struct	s_enemy
+typedef struct s_enemy
 {
 	double		pos_x;
 	double		pos_y;
@@ -99,7 +107,7 @@ typedef struct	s_enemy
 	int			health;
 }				t_enemy;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	double		pos_x;
 	double		pos_y;
@@ -112,7 +120,7 @@ typedef struct	s_player
 	int			rotate;
 	t_texture	gun_texture;
 	int			health;
-	
+
 }				t_player;
 
 typedef struct s_raycast
