@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:26:01 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/12 12:19:48 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:01:35 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_map_info
 	double		player_plane_y;
 	double		*ennemy_sprites;
 	double		*other_sprites;
+	size_t		ennemy_count;
 	t_enemy_pos	*enemy_pos;
 	char		*no_path;
 	char		*so_path;

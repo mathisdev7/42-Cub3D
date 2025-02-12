@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:28:40 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/12 12:24:13 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:02:41 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,9 @@ void	find_sprites(char **map, t_map_info *map_info)
 {
 	size_t	i;
 	size_t	j;
-	int		enemy_size;
 
 	i = -1;
-	enemy_size = 0;
+	map_info->ennemy_count = 0;
 	map_info->enemy_pos = malloc(sizeof(t_enemy_pos) * 100);
 	if (!map_info->enemy_pos)
 		return ;
@@ -59,9 +58,9 @@ void	find_sprites(char **map, t_map_info *map_info)
 		{
 			if (map[i][j] == '2')
 			{
-				map_info->enemy_pos[enemy_size].pos_x = i;
-				map_info->enemy_pos[enemy_size].pos_y = j;
-				enemy_size++;
+				map_info->enemy_pos[map_info->ennemy_count].pos_x = i;
+				map_info->enemy_pos[map_info->ennemy_count].pos_y = j;
+				map_info->ennemy_count++;
 			}
 			else if (map[i][j] == '3')
 			{
