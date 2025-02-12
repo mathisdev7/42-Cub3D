@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/11 14:55:14 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:58:48 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 # define GUN_IDLE_PATH "./assets/base/gun_idle.xpm"
 # define GUN_FIRE_PATH "./assets/base/gun_fire.xpm"
 # define FIRE_SOUND_PATH "./assets/base/33.wav"
+
+# define ENEMY_IDLE_PATH "./assets/base/guard.xpm"
+# define ENEMY_DEAD_PATH "./assets/base/dead.xpm"
 
 # define NORTH 0
 # define SOUTH 1
@@ -90,7 +93,6 @@ void		init_raycast(t_raycast *raycast);
 void		init_screen_buffer(t_game *game);
 void		*ft_calloc(size_t count, size_t size);
 void		render_sprites(t_game *game, double *z_buffer);
-void		init_sprite(t_game *game, char *filename);
 t_texture	init_xpm_texture(t_game *game, char *filename);
 void		shoot_weapon(t_game *game);
 void		play_sound(const char *path);
@@ -103,5 +105,8 @@ void    	move_left(t_player *player, char **map);
 void 		rotate_right(t_player *player);
 void 		rotate_left(t_player *player);
 void		move_player(t_game *game);
+void		init_enemies(t_game *game);
+size_t		get_enemy_index(t_game *game, double x, double y);
+void		move_enemy(t_game *game, int enemy_index);
 
 #endif

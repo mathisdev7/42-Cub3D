@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:41:01 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/12 09:36:54 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:04:05 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,8 @@ void shoot_weapon(t_game *game)
     double bullet_x;
     double bullet_y;
     double steps;
-    double  sprite_dist;
+    double  enemy_dist;
+    int     enemy_index;
     
     steps = 0.05;
     play_sound(FIRE_SOUND_PATH);
@@ -147,11 +148,16 @@ void shoot_weapon(t_game *game)
 
         if (game->map_info.map[(int)bullet_y][(int)bullet_x] == '1')
             break;
-        sprite_dist = sqrt(pow(bullet_x - game->sprite.x, 2) + pow(bullet_y - game->sprite.y, 2));
-        if (sprite_dist < SHOOT_PRECISION)
+        enemy_index = get_enemy_index(game, bullet_x, bullet_y);
+        if (enemy_index != -1)
         {
-            game->sprite.texture = init_xpm_texture(game, "./assets/base/dead.xpm");
-            break;
+            enemy_dist = sqrt(pow(bullet_x - game->enemies[enemy_index].pos_x , 2) + pow(bullet_y - game->enemies[enemy_index].pos_y, 2));
+            if (enemy_dist < SHOOT_PRECISION && !game->enemies[enemy_index].is_dead)
+            {
+                game->sprites[enemy_index].texture = init_xpm_texture(game, ENEMY_DEAD_PATH);
+                game->enemies[enemy_index].is_dead = 1;
+                break;
+            }
         }
         steps += 0.05;
     }

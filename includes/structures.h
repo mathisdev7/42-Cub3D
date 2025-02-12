@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:26:01 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/12 14:01:35 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:51:17 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ typedef struct s_enemy
 {
 	double		pos_x;
 	double		pos_y;
-	t_texture	texture;
+	t_sprite	sprite;
 	int			health;
+	int			is_dead;
 }				t_enemy;
 
 typedef struct s_player
@@ -156,10 +157,11 @@ typedef struct s_game
 	t_player	player;
 	int			tex_size;
 	t_texture	textures[4];
-	t_sprite	sprite;
+	t_sprite	sprites[200];
 	int			**screen_buffer;
 	t_map_info	map_info;
 	t_raycast	raycast;
+	t_enemy		enemies[200];
 }				t_game;
 
 #endif

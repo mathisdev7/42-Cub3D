@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:53:00 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/11 15:16:00 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:05:27 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	set_pixel_color(t_game *game, int x, int y, t_texture *screen_texture)
 	if (game->screen_buffer[y][x] > 0)
 		set_image_pixel(screen_texture, x, y, game->screen_buffer[y][x]);
 	else if (y < game->screen_height / 2)
-		set_image_pixel(screen_texture, x, y, 0x808080);
+		set_image_pixel(screen_texture, x, y, 0xCAAA47);
 	else if (y < game->screen_height - 1)
-		set_image_pixel(screen_texture, x, y, 0x141414);
+		set_image_pixel(screen_texture, x, y, 0x6C5920);
 }
 
 static int	key_press_handler(int key, void *param)
@@ -123,6 +123,7 @@ int	update(void *param) // function called every frame
 
 	game = (t_game *)param;
 	move_player(game);
+	move_enemy(game, 3);
 	clear_screen_buffer(game);
 	init_raycast(&game->raycast);
 	raycasting(&game->raycast, game);

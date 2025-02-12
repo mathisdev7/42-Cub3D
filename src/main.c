@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:21 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/12 14:03:29 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:54:34 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ int	main(int argc, char **argv)
 	if (check_map_and_colors(map, &map_info, argv[1]))
 		return (free_all(map, &map_info), 0);
 	game = NULL;
-	printf("map_info.enemy_size = %ld\n", map_info.ennemy_count);
-	printf("map_info.enemy_pos[0].pos_x = %f\n", map_info.enemy_pos[0].pos_x);
-	printf("map_info.enemy_pos[0].pos_y = %f\n", map_info.enemy_pos[0].pos_y);
-	printf("map_info.enemy_pos[1].pos_x = %f\n", map_info.enemy_pos[1].pos_x);
-	printf("map_info.enemy_pos[1].pos_y = %f\n", map_info.enemy_pos[1].pos_y);
-	printf("map_info.enemy_pos[0].pos_x = %f\n", map_info.enemy_pos[2].pos_x);
-	printf("map_info.enemy_pos[0].pos_y = %f\n", map_info.enemy_pos[2].pos_y);
 	init_game_info(game, &map_info, map);
 	return (0);
 }

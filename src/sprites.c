@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 06:56:31 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/12 14:04:27 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:40:35 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	render_sprites(t_game *game, double *z_buffer)
 {
-	int			num_sprite;
-	t_sprite	sprite[1];
 	double		sprite_x;
 	double		sprite_y;
 	double		invDet;
@@ -32,30 +30,41 @@ void	render_sprites(t_game *game, double *z_buffer)
 	int			d;
 	int			texY;
 	int			color;
+	int		order[200];
+	double	distance[200];
+	int		sprite_index;
+	
+	for (int i = 0; i < 200; i++)
+	{
+		double dx = game->sprites[i].x - game->player.pos_x;
+		double dy = game->sprites[i].y - game->player.pos_y;
+		distance[i] = dx * dx + dy * dy; // Distance au carré (évite sqrt)
+		order[i] = i;
+	}
 
-	num_sprite = 1;
-	sprite[0].x = game->sprite.x;
-	sprite[0].y = game->sprite.y;
-	sprite[0].texture = game->sprite.texture;
-	// int spriteOrder[num_sprite];
-	// double spriteDistance[num_sprite];
-	// void sortSprites(int* order, double* dist, int amount);
-	/*for (int i = 0; i < num_sprite; i++)
+	for (int i = 0; i < 200; i++)
 	{
-		spriteDistance[i] = ((game->player_pos_x - sprite[i].x) *
-			(game->player_pos_x - sprite[i].x) +
-			(game->player_pos_y - sprite[i].y) * (game->player_pos_y
-				- sprite[i].y));
-	}*/
-	for (int i = 0; i < num_sprite; i++)
+		for (int j = 0; j < 199 - i; j++)
+		{
+			if (distance[order[j]] < distance[order[j + 1]])
+			{
+				int tmp = order[j];
+				order[j] = order[j + 1];
+				order[j + 1] = tmp;
+			}
+		}
+	}
+	sprite_index = 0;
+	for (int i = 0; i < 200; i++)
 	{
-		sprite_x = sprite[i].x - game->player_pos_x;
-		sprite_y = sprite[i].y - game->player_pos_y;
-		invDet = 1.0 / (game->plane_x * game->player_dir_y - game->player_dir_x
-				* game->plane_y);
-		transformX = invDet * (game->player_dir_y * sprite_x
-				- game->player_dir_x * sprite_y);
-		transformY = invDet * (-game->plane_y * sprite_x + game->plane_x
+		sprite_index = order[i];
+		sprite_x = game->sprites[sprite_index].x - game->player.pos_x;
+		sprite_y = game->sprites[sprite_index].y - game->player.pos_y;
+		invDet = 1.0 / (game->player.plane_x * game->player.dir_y - game->player.dir_x
+				* game->player.plane_y);
+		transformX = invDet * (game->player.dir_y * sprite_x
+				- game->player.dir_x * sprite_y);
+		transformY = invDet * (-game->player.plane_y * sprite_x + game->player.plane_x
 				* sprite_y);
 		spriteScreenX = (int)(game->screen_width / 2) * (1 + transformX
 				/ transformY);
@@ -76,7 +85,7 @@ void	render_sprites(t_game *game, double *z_buffer)
 		for (int stripe = drawStartX; stripe < drawEndX; stripe++)
 		{
 			texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX))
-					* sprite->texture.width / spriteWidth) / 256;
+					* game->sprites[sprite_index].texture.width / spriteWidth) / 256;
 			if (transformY > 0 && stripe > 0 && stripe < game->screen_width
 				&& transformY < z_buffer[stripe])
 			{
@@ -84,8 +93,8 @@ void	render_sprites(t_game *game, double *z_buffer)
 				{
 					d = y * 256 - game->screen_height * 128 + spriteHeight
 						* 128;
-					texY = ((d * sprite->texture.height) / spriteHeight) / 256;
-					color = sprite->texture.addr[texY * sprite->texture.width
+					texY = ((d * game->sprites[sprite_index].texture.height) / spriteHeight) / 256;
+					color = game->sprites[sprite_index].texture.addr[texY * game->sprites[sprite_index].texture.width
 						+ texX];
 					if ((color & 0x00FFFFFF) != 0) // Ignore transparent pixels
 					{
