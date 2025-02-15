@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:58:59 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/11 15:14:40 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/15 15:03:03 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_texture	init_xpm_texture(t_game *game, char *filename)
     return (texture);
 }
 
-void draw_texture_on_screen(t_game *game, t_texture tex, int scale, int draw_x, int draw_y)
+void draw_texture_on_screen(t_game *game, t_texture tex, double scale, double draw_x, double draw_y)
 {
     int target_width = tex.width * scale;
     int target_height = tex.height * scale;
@@ -55,7 +55,7 @@ void draw_texture_on_screen(t_game *game, t_texture tex, int scale, int draw_x, 
                     if (draw_x + x >= 0 && draw_x + x < game->screen_width && draw_y + y >= 0 && draw_y + y < game->screen_height) 
                     {
                         // Affecter la couleur à l'écran (ajouter x et y à draw_x et draw_y)
-                        game->screen_buffer[draw_y + y][draw_x + x] = color;
+                        game->screen_buffer[(int)draw_y + y][(int)draw_x + x] = color;
                     }
                 }
             }

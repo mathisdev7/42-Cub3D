@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/12 18:58:48 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/15 22:53:33 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_texture	init_xpm_texture(t_game *game, char *filename);
 void		shoot_weapon(t_game *game);
 void		play_sound(const char *path);
 t_player    init_player(t_game *game);
-void		draw_texture_on_screen(t_game *game, t_texture tex, int scale, int draw_x, int draw_y);
+void		draw_texture_on_screen(t_game *game, t_texture tex, double scale, double draw_x, double draw_y);
 void 		move_forward(t_player *player, char **map);
 void    	move_backward(t_player *player, char **map);
 void    	move_right(t_player *player, char **map);
@@ -107,6 +107,5 @@ void 		rotate_left(t_player *player);
 void		move_player(t_game *game);
 void		init_enemies(t_game *game);
 size_t		get_enemy_index(t_game *game, double x, double y);
-void		move_enemy(t_game *game, int enemy_index);
 
 #endif

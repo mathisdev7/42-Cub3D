@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:53:00 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/12 19:05:27 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/15 22:54:38 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,38 @@ static int	key_release_handler(int key, void *param)
 	return (0);
 }
 
+void    draw_minimap(t_game *game, double scale)
+{
+    int            j, i;
+    int            draw_start_x, draw_start_y;
+	t_texture	wall_tex;
+	t_texture	floor_tex;
+	t_texture 	player_tex;
+
+    wall_tex = init_xpm_texture(game, "./assets/base/wall.xpm");
+	floor_tex = init_xpm_texture(game, "./assets/base/floor.xpm");
+	player_tex = init_xpm_texture(game, "./assets/base/player_point.xpm");
+    double         tile_size = wall_tex.height * scale;
+
+	draw_start_y = 5;
+    for (j = 0; game->map_info.map[j]; j++)
+    {
+        draw_start_x = 5;
+        for (i = 0; game->map_info.map[j][i]; i++)
+        {
+            if (game->map_info.map[j][i] == '1')
+                draw_texture_on_screen(game, wall_tex, scale, draw_start_x, draw_start_y);
+            else
+                draw_texture_on_screen(game, floor_tex, scale, draw_start_x, draw_start_y);
+            draw_start_x += tile_size;
+        }
+        draw_start_y += tile_size;
+    }
+    double player_minimap_x = game->player.pos_x * tile_size - (player_tex.width * scale * 0.7) / 2;
+    double player_minimap_y = game->player.pos_y * tile_size - (player_tex.height * scale * 0.7) / 2;
+    draw_texture_on_screen(game, player_tex, scale * 0.7, player_minimap_x + 5, player_minimap_y + 5);
+}
+
 void	fill_screen(t_game *game)
 {
 	int			x;
@@ -123,11 +155,11 @@ int	update(void *param) // function called every frame
 
 	game = (t_game *)param;
 	move_player(game);
-	move_enemy(game, 3);
 	clear_screen_buffer(game);
 	init_raycast(&game->raycast);
 	raycasting(&game->raycast, game);
 	draw_texture_on_screen(game, game->player.gun_texture, 6, 100, 100);
+	draw_minimap(game, 0.2);
 	fill_screen(game);
 	return (0);
 }

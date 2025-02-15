@@ -6,19 +6,11 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:09:22 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/12 19:00:30 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/15 14:25:30 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void    move_enemy(t_game *game, int enemy_index)
-{
-    if (game->enemies[enemy_index].is_dead)
-        return ;
-    game->enemies[enemy_index].pos_x += 0.01;
-    game->sprites[enemy_index].x = game->enemies[enemy_index].pos_x;
-}
 
 size_t get_enemy_index(t_game *game, double x, double y)
 {

@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:41:01 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/12 18:04:05 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/15 22:50:56 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,16 @@ void shoot_weapon(t_game *game)
             enemy_dist = sqrt(pow(bullet_x - game->enemies[enemy_index].pos_x , 2) + pow(bullet_y - game->enemies[enemy_index].pos_y, 2));
             if (enemy_dist < SHOOT_PRECISION && !game->enemies[enemy_index].is_dead)
             {
-                game->sprites[enemy_index].texture = init_xpm_texture(game, ENEMY_DEAD_PATH);
-                game->enemies[enemy_index].is_dead = 1;
+                // ENEMY HIT
+                game->enemies[enemy_index].health -= 25;
+                if (game->enemies[enemy_index].health <= 0)
+                {
+                    game->enemies[enemy_index].is_dead = 1;
+                    game->sprites[enemy_index].texture = init_xpm_texture(game, "./assets/base/dead.xpm");
+                    play_sound("./assets/base/45.wav");
+                    break;
+                }
+                play_sound("./assets/base/42.wav");
                 break;
             }
         }
