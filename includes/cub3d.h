@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/26 17:09:03 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:39:48 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void		raycasting(t_raycast *raycast, t_game *game);
 void		init_raycast(t_raycast *raycast);
 void		init_screen_buffer(t_game *game);
 void		*ft_calloc(size_t count, size_t size);
-void		render_sprites(t_game *game, double *z_buffer);
 t_texture	init_xpm_texture(t_game *game, char *filename);
 t_player	init_player(t_game *game);
 void		move_forward(t_player *player, char **map);
@@ -96,10 +95,11 @@ void		set_curr_line_values(t_raycast *raycast, int x, t_game *game);
 void		init_step_and_side_dist(t_raycast *raycast, t_game *game);
 void		dda_algorithm(t_raycast *raycast, t_game *game);
 void		set_image_pixel(t_texture *screen_tex, int x, int y, int color);
+uint32_t	convert_to_hex(const char *input);
 void		set_pixel_color(t_game *game, int x, int y,
 				t_texture *screen_texture);
 int			key_release_handler(int key, void *param);
 int			key_press_handler(int key, void *param);
-int 		close_game(t_game *game);
+int			close_game(t_game *game);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:53:00 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/26 17:17:46 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:24:36 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,12 @@ int	update(void *param)
 	return (0);
 }
 
-int close_game(t_game *game)
+int	close_game(t_game *game)
 {
 	int	i;
 
 	i = 0;
-	free_int_array(game->screen_buffer,
-		(game->screen_height * game->screen_width) - 2);
+	free_int_array(game->screen_buffer, game->screen_height);
 	while (i < 4)
 	{
 		mlx_destroy_image(game->mlx, game->textures[i].img);

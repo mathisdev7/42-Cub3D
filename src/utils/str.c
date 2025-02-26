@@ -6,7 +6,7 @@
 /*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:45:39 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/09 14:12:06 by mazeghou         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:40:57 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,11 @@ int	check_color(char *color)
 	int		i;
 	int		j;
 	char	**colors;
+	int		value;
 
 	i = 0;
 	colors = ft_split(color, ',');
-	if (!colors)
-		return (0);
-	if (ft_array_len(colors) != 3)
+	if (!colors || ft_array_len(colors) != 3)
 		return (ft_free_array(colors), 0);
 	while (colors[i])
 	{
@@ -104,6 +103,9 @@ int	check_color(char *color)
 				return (ft_free_array(colors), 0);
 			j++;
 		}
+		value = ft_atoi(colors[i]);
+		if (value < 0 || value > 255)
+			return (ft_free_array(colors), 0);
 		i++;
 	}
 	ft_free_array(colors);

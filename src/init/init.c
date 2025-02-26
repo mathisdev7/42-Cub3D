@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 04:33:25 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/26 17:13:51 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:23:11 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	init_screen_buffer(t_game *game)
 
 	if (game->screen_buffer)
 		free_int_array(game->screen_buffer, game->screen_height);
-	game->screen_buffer = malloc(sizeof(int *) * (game->screen_height - 1));
+	game->screen_buffer = malloc(sizeof(int *) * game->screen_height);
 	i = 0;
 	while (i < game->screen_height)
 	{
-		game->screen_buffer[i] = malloc(sizeof(int) * (game->screen_width - 1));
+		game->screen_buffer[i] = malloc(sizeof(int) * game->screen_width);
 		i++;
 	}
 }

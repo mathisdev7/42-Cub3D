@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:26:01 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/26 17:15:32 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:38:54 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+typedef struct s_rgb
+{
+	char		**colors;
+	int			r;
+	int			g;
+	int			b;
+	int			hex_value;
+}				t_rgb;
 
 typedef struct s_enemy_pos
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_to_struct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mazeghou <mazeghou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 12:28:40 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/12 15:00:41 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:20:55 by mazeghou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,37 +39,6 @@ int	*find_player(char **map)
 		}
 	}
 	return (free(player), NULL);
-}
-
-void	find_sprites(char **map, t_map_info *map_info)
-{
-	size_t	i;
-	size_t	j;
-
-	i = -1;
-	map_info->ennemy_count = 0;
-	map_info->enemy_pos = malloc(sizeof(t_enemy_pos) * 100);
-	if (!map_info->enemy_pos)
-		return ;
-	while (map[++i])
-	{
-		j = -1;
-		while (map[i][++j])
-		{
-			if (map[i][j] == '2')
-			{
-				map_info->enemy_pos[map_info->ennemy_count].pos_x = j;
-				map_info->enemy_pos[map_info->ennemy_count].pos_y = i;
-				map_info->ennemy_count++;
-			}
-			else if (map[i][j] == '3')
-			{
-				map_info->other_sprites = malloc(sizeof(size_t) * 2);
-				map_info->other_sprites[1] = i;
-				map_info->other_sprites[0] = j;
-			}
-		}
-	}
 }
 
 void	set_map_info(t_map_info *map_info, char **map, int max_width)
@@ -125,7 +94,6 @@ t_map_info	map_to_struct(char **map, char *map_path)
 	player_coords = find_player(map);
 	parse_assets(map_path, &map_info);
 	parse_color(map_path, &map_info);
-	find_sprites(map, &map_info);
 	if (player_coords)
 		set_player_position_and_assets(&map_info, player_coords, 1);
 	else
