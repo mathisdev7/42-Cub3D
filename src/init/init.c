@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 04:33:25 by nopareti          #+#    #+#             */
-/*   Updated: 2025/02/15 22:32:41 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:13:51 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,17 @@ void	init_screen_buffer(t_game *game)
 	}
 }
 
-int	init_textures(t_game *game)
+void	init_textures(t_game *game)
 {
-	char	*texture_paths[4] = {game->map_info.tab_assets[0],
-			game->map_info.tab_assets[1], game->map_info.tab_assets[2],
-			game->map_info.tab_assets[3]};
+	char	*texture_paths[4];
 	int		i;
 	int		width;
 	int		height;
 
+	texture_paths[0] = game->map_info.tab_assets[0];
+	texture_paths[1] = game->map_info.tab_assets[1];
+	texture_paths[2] = game->map_info.tab_assets[2];
+	texture_paths[3] = game->map_info.tab_assets[3];
 	width = game->tex_size;
 	height = game->tex_size;
 	i = 0;
@@ -66,18 +68,13 @@ int	init_textures(t_game *game)
 	{
 		game->textures[i].img = mlx_xpm_file_to_image(game->mlx,
 				texture_paths[i], &width, &height);
-		if (!game->textures[i].img)
-			return (0);
 		game->textures[i].addr = (int *)mlx_get_data_addr(game->textures[i].img,
 				&game->textures[i].bits_per_pixel, &game->textures[i].size_line,
 				&game->textures[i].endian);
-		if (!game->textures[i].addr)
-			return (0);
 		game->textures[i].width = width;
 		game->textures[i].height = height;
 		i++;
 	}
-	return (1);
 }
 
 t_game	*init_game(t_map_info map_info)
@@ -94,7 +91,6 @@ t_game	*init_game(t_map_info map_info)
 	game->win = mlx_new_window(game->mlx, game->screen_width,
 			game->screen_height, "Cub3d");
 	game->player = init_player(game);
-	init_enemies(game);
 	init_textures(game);
 	init_screen_buffer(game);
 	return (game);

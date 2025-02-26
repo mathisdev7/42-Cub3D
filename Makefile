@@ -6,7 +6,7 @@
 #    By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 20:34:26 by mazeghou          #+#    #+#              #
-#    Updated: 2025/02/12 14:09:16 by nopareti         ###   ########.fr        #
+#    Updated: 2025/02/26 16:46:02 by nopareti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,10 @@ SRC         = main.c parsing/map.c parsing/args.c parsing/cardinals.c \
 				parsing/map_validation.c utils/array_utils.c \
 				parsing/set.c parsing/colors.c parsing/map_validation2.c \
 				parsing/player.c parsing/map_last.c init/init.c \
-				raycasting.c render.c utils/file.c utils/check.c sprites.c \
-				player.c utils/utils_functions.c enemy.c
+				raycasting/raycasting.c render.c utils/file.c utils/check.c \
+				player/player.c utils/utils_functions.c player/player_rotate.c \
+				player/player_movements.c raycasting/init_values.c raycasting/dda.c \
+				keys_handler.c
 
 SRCS        = $(addprefix $(SRC_PATH), $(SRC))
 

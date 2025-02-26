@@ -6,7 +6,7 @@
 /*   By: nopareti <nopareti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 23:17:29 by mazeghou          #+#    #+#             */
-/*   Updated: 2025/02/15 22:53:33 by nopareti         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:09:03 by nopareti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define MOVESPEED 0.05
-# define ROTSPEED 0.05
-
-# define SHOOT_DISTANCE 5
-# define SHOOT_PRECISION 0.3
-
-# define GUN_IDLE_PATH "./assets/base/gun_idle.xpm"
-# define GUN_FIRE_PATH "./assets/base/gun_fire.xpm"
-# define FIRE_SOUND_PATH "./assets/base/33.wav"
-
-# define ENEMY_IDLE_PATH "./assets/base/guard.xpm"
-# define ENEMY_DEAD_PATH "./assets/base/dead.xpm"
+# define MOVESPEED 0.02
+# define ROTSPEED 0.02
 
 # define NORTH 0
 # define SOUTH 1
@@ -94,18 +84,22 @@ void		init_screen_buffer(t_game *game);
 void		*ft_calloc(size_t count, size_t size);
 void		render_sprites(t_game *game, double *z_buffer);
 t_texture	init_xpm_texture(t_game *game, char *filename);
-void		shoot_weapon(t_game *game);
-void		play_sound(const char *path);
-t_player    init_player(t_game *game);
-void		draw_texture_on_screen(t_game *game, t_texture tex, double scale, double draw_x, double draw_y);
-void 		move_forward(t_player *player, char **map);
-void    	move_backward(t_player *player, char **map);
-void    	move_right(t_player *player, char **map);
-void    	move_left(t_player *player, char **map);
-void 		rotate_right(t_player *player);
-void 		rotate_left(t_player *player);
+t_player	init_player(t_game *game);
+void		move_forward(t_player *player, char **map);
+void		move_backward(t_player *player, char **map);
+void		move_right(t_player *player, char **map);
+void		move_left(t_player *player, char **map);
+void		rotate_right(t_player *player);
+void		rotate_left(t_player *player);
 void		move_player(t_game *game);
-void		init_enemies(t_game *game);
-size_t		get_enemy_index(t_game *game, double x, double y);
+void		set_curr_line_values(t_raycast *raycast, int x, t_game *game);
+void		init_step_and_side_dist(t_raycast *raycast, t_game *game);
+void		dda_algorithm(t_raycast *raycast, t_game *game);
+void		set_image_pixel(t_texture *screen_tex, int x, int y, int color);
+void		set_pixel_color(t_game *game, int x, int y,
+				t_texture *screen_texture);
+int			key_release_handler(int key, void *param);
+int			key_press_handler(int key, void *param);
+int 		close_game(t_game *game);
 
 #endif
